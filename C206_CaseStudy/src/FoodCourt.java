@@ -1,13 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-/**
- * I declare that this code was written by me.
- * I will not copy or allow others to copy my code.
- * I understand that copying code is considered as plagiarism.
- *
- * gohja, 4 Aug 2023 9:54:43 am
- */
+
 
 public class FoodCourt {
     private Map<String, Stall> stalls;
