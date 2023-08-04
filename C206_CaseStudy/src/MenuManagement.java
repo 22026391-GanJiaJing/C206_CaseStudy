@@ -3,6 +3,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuManagement {
+	private static List<MenuItem> menuItems = new ArrayList<>();
+
+	public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nMenu Management System");
+            System.out.println("1. Add new item to the menu");
+            System.out.println("2. View all items in the menu");
+            System.out.println("3. Delete an item from the menu");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+ 
+
+public class MenuManagement {
     private static List<MenuItem> menuItems = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -18,6 +36,7 @@ public class MenuManagement {
 
             int choice = scanner.nextInt();
             scanner.nextLine();
+
 
             switch (choice) {
                 case 1:
@@ -76,21 +95,4 @@ public class MenuManagement {
         System.out.println("Item not found in the menu.");
     }
 }
-
-class MenuItem {
-    private String name;
-    private double price;
-
-    public MenuItem(String name, double price) {
-        this.name = name;
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
 }
