@@ -20,14 +20,29 @@ public class AccountsMain {
 		int option = -1;
 		accMainMenu();
 		loadAccounts();
-		option = Helper.readInt("");
-
 		
+		option = Helper.readInt("Enter Choice > ");
+		if (option == 1) {
+			viewAccounts();
+		} else if (option == 2) {
+			createAccount();
+		} else if (option == 3) {
+			deleteAccount();
+		} else {
+			System.out.println("Invalid choice!");
+		}
+		option = Helper.readInt("Enter choice > ");
+
+		System.out.println("Goodbye!");
+
 	}
 
 	// Account Main Menu (Contains 3 options, view, create, delete)
 	private void accMainMenu() {
-
+		Helper.line(100, "=");
+		System.out.println("CANTEEN ACCOUNT MANAGEMENT SYSTEM");
+		Helper.line(100, "=");
+		System.out.println("1. View all accounts\n2. Create an account\n3. Delete an account");
 	}
 
 	// Text file database of all existing accounts
@@ -42,6 +57,8 @@ public class AccountsMain {
 				String[] accInfoSplit = line.split(",");
 
 				accounts.add(new Account(accInfoSplit[0], accInfoSplit[1], accInfoSplit[2]));
+				
+				line = br.readLine();
 			}
 
 			br.close();
@@ -51,6 +68,21 @@ public class AccountsMain {
 		} catch (IOException io) {
 			System.out.println("Error occured during file read");
 		}
+
+	}
+
+	// View all accounts in tabular format. User story 20
+	private void viewAccounts() {
+		
+	}
+
+	// Create an account. User story 19
+	private void createAccount() {
+
+	}
+
+	// Delete an account. User story 21
+	private void deleteAccount() {
 
 	}
 
