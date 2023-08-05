@@ -76,19 +76,19 @@ public class AccountsMain {
 
 	// View all accounts in tabular format. User story 20
 	private void viewAccounts() {
-		Helper.line(100,"-");
+		Helper.line(100, "-");
 		System.out.println(String.format("%-20s%s", "NAME", "ROLE"));
 		for (Account a : accounts) {
-			System.out.println(String.format("%-19s%s", a.getName(), a.getRole()));
+			System.out.println(String.format("%-20s%s", a.getName(), a.getRole()));
 		}
-		Helper.line(100,"-");
+		Helper.line(100, "-");
 
 //		System.out.println(String.format("%-19s%s", accounts.get(0).getName(), accounts.get(0).getRole()));
 	}
 
 	// Create an account. User story 19
 	private void createAccount() {
-		Helper.line(100,"-");
+		Helper.line(100, "-");
 		// User input
 		String accName = Helper.readString("Enter account name: ");
 		String accPass = Helper.readString("Enter account password: ");
@@ -109,18 +109,47 @@ public class AccountsMain {
 		} catch (IOException io) {
 			System.out.println("There was an error writing to the file.");
 		}
-		Helper.line(100,"-");
+		Helper.line(100, "-");
 	}
 
 	// Delete an account. User story 21
 	private void deleteAccount() {
-		Helper.line(100,"-");
-		File tempAccFile = new File("tempAccounts.txt");
+		Helper.line(100, "-");
+		File existing = new File("Accounts.txt");
+		File tempFile = new File("tempAccount.txt");
+		boolean deleted = false;
+
 		String deletionName = Helper.readString("Enter name of account for deletion: ");
-		
-		
-		
-		Helper.line(100,"-");
+
+		try {
+			File file = new File("tempAccount.txt");
+			FileWriter fw = new FileWriter(file, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (Account a : accounts) {
+				if (a.getName() != deletionName) {
+					bw.write(a.getName() + ", " + a.getPassword() + ", " + a.getRole() + "\n");
+					deleted = true;
+				}
+
+				existing.delete();
+				File replacement = new File("Accounts.txt");
+				tempFile.renameTo(replacement);
+
+				bw.close();
+				if (deleted = false) {
+					System.out.println("No such account!");
+				} else {
+					System.out.println("Deletion compelte. Refresh program to see results");
+				}
+
+			}
+
+		} catch (IOException io) {
+			System.out.println("There was an error writing to the file.");
+		}
+
+		Helper.line(100, "-");
+
 	}
 
 }
