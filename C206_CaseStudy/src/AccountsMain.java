@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class AccountsMain {
@@ -74,7 +76,6 @@ public class AccountsMain {
 
 	// View all accounts in tabular format. User story 20
 	private void viewAccounts() {
-		loadAccounts();
 		System.out.println(String.format("%-20s%s", "NAME", "ROLE"));
 		for (Account a : accounts) {
 			System.out.println(String.format("%-19s%s", a.getName(), a.getRole()));
@@ -85,7 +86,24 @@ public class AccountsMain {
 
 	// Create an account. User story 19
 	private void createAccount() {
+		String accName = Helper.readString("Enter account name: ");
+		String accPass = Helper.readString("Enter account password: ");
+		String accRole = Helper.readString("Enter account role: ");
 
+		try {
+			File file = new File("Accounts.txt");
+			FileWriter fw = new FileWriter(file, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			bw.write(accName + ", " + accPass + ", " + accRole + "\n");
+
+			bw.close();
+
+			System.out.println("Account added!");
+
+		} catch (IOException io) {
+			System.out.println("There was an error writing to the file.");
+		}
 	}
 
 	// Delete an account. User story 21
