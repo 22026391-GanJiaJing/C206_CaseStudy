@@ -20,6 +20,7 @@ public class AccountsMain {
 		int option = -1;
 		accMainMenu();
 		loadAccounts();
+		option = Helper.readInt("");
 
 		
 	}
