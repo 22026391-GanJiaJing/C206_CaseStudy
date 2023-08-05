@@ -21,17 +21,19 @@ public class AccountsMain {
 		accMainMenu();
 		loadAccounts();
 		
-		option = Helper.readInt("Enter Choice > ");
-		if (option == 1) {
-			viewAccounts();
-		} else if (option == 2) {
-			createAccount();
-		} else if (option == 3) {
-			deleteAccount();
-		} else {
-			System.out.println("Invalid choice!");
+		while (option != 4) {
+			option = Helper.readInt("Enter Choice > ");
+			if (option == 1) {
+				viewAccounts();
+			} else if (option == 2) {
+				createAccount();
+			} else if (option == 3) {
+				deleteAccount();
+			} else {
+				System.out.println("Invalid choice!");
+			}
 		}
-		option = Helper.readInt("Enter choice > ");
+
 
 		System.out.println("Goodbye!");
 
