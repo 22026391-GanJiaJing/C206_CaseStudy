@@ -20,7 +20,7 @@ public class AccountsMain {
 		int option = -1;
 		accMainMenu();
 		loadAccounts();
-		
+
 		while (option != 4) {
 			option = Helper.readInt("Enter Choice > ");
 			if (option == 1) {
@@ -29,11 +29,10 @@ public class AccountsMain {
 				createAccount();
 			} else if (option == 3) {
 				deleteAccount();
-			} else {
+			} else if (option != 4) {
 				System.out.println("Invalid choice!");
 			}
 		}
-
 
 		System.out.println("Goodbye!");
 
@@ -59,7 +58,7 @@ public class AccountsMain {
 				String[] accInfoSplit = line.split(",");
 
 				accounts.add(new Account(accInfoSplit[0], accInfoSplit[1], accInfoSplit[2]));
-				
+
 				line = br.readLine();
 			}
 
@@ -75,7 +74,7 @@ public class AccountsMain {
 
 	// View all accounts in tabular format. User story 20
 	private void viewAccounts() {
-		
+
 	}
 
 	// Create an account. User story 19
