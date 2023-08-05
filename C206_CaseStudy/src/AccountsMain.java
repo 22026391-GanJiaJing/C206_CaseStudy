@@ -74,7 +74,13 @@ public class AccountsMain {
 
 	// View all accounts in tabular format. User story 20
 	private void viewAccounts() {
+		loadAccounts();
+		System.out.println(String.format("%-20s%s", "NAME", "ROLE"));
+		for (Account a : accounts) {
+			System.out.println(String.format("%-19s%s", a.getName(), a.getRole()));
+		}
 
+//		System.out.println(String.format("%-19s%s", accounts.get(0).getName(), accounts.get(0).getRole()));
 	}
 
 	// Create an account. User story 19
