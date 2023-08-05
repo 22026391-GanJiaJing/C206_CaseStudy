@@ -21,6 +21,7 @@ public class AccountsMain {
 		accMainMenu();
 		loadAccounts();
 
+		
 	}
 
 	// Account Main Menu (Contains 3 options, view, create, delete)
