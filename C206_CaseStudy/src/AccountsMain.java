@@ -76,20 +76,25 @@ public class AccountsMain {
 
 	// View all accounts in tabular format. User story 20
 	private void viewAccounts() {
+		Helper.line(100,"-");
 		System.out.println(String.format("%-20s%s", "NAME", "ROLE"));
 		for (Account a : accounts) {
 			System.out.println(String.format("%-19s%s", a.getName(), a.getRole()));
 		}
+		Helper.line(100,"-");
 
 //		System.out.println(String.format("%-19s%s", accounts.get(0).getName(), accounts.get(0).getRole()));
 	}
 
 	// Create an account. User story 19
 	private void createAccount() {
+		Helper.line(100,"-");
+		// User input
 		String accName = Helper.readString("Enter account name: ");
 		String accPass = Helper.readString("Enter account password: ");
 		String accRole = Helper.readString("Enter account role: ");
 
+		// Writing account details to text file
 		try {
 			File file = new File("Accounts.txt");
 			FileWriter fw = new FileWriter(file, true);
@@ -99,16 +104,23 @@ public class AccountsMain {
 
 			bw.close();
 
-			System.out.println("Account added!");
+			System.out.println("Account added! Please refresh the program!");
 
 		} catch (IOException io) {
 			System.out.println("There was an error writing to the file.");
 		}
+		Helper.line(100,"-");
 	}
 
 	// Delete an account. User story 21
 	private void deleteAccount() {
-
+		Helper.line(100,"-");
+		File tempAccFile = new File("tempAccounts.txt");
+		String deletionName = Helper.readString("Enter name of account for deletion: ");
+		
+		
+		
+		Helper.line(100,"-");
 	}
 
 }
