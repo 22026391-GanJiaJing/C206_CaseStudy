@@ -43,7 +43,7 @@ public class AccountsMain {
 		Helper.line(100, "=");
 		System.out.println("CANTEEN ACCOUNT MANAGEMENT SYSTEM");
 		Helper.line(100, "=");
-		System.out.println("1. View all accounts\n2. Create an account\n3. Delete an account");
+		System.out.println("1. View all accounts\n2. Create an account\n3. Delete an account\n4. Exit");
 	}
 
 	// Text file database of all existing accounts
