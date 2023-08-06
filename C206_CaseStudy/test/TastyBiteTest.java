@@ -12,6 +12,7 @@ public class TastyBiteTest {
 	private Account A1;
 	private Account A2;
 	private Account A3;
+	private Account A4;
 	private Stall s1;
 	private Stall s2;
 	private Stall s3;
@@ -26,12 +27,13 @@ public class TastyBiteTest {
 	@Before
 	public void setUp() throws Exception {
 		// prepare test data
-		A1 = new Account("CC0011", "Nikon HDSLR", 40);
-		A2 = new Account("CC0012", "Sony DSC-RX100M7", 20);
-		A3 = new Account("CC0013", "panasoni DSC-RX100M7", 30);
-		s1 = new Stall("CB0011", "My Google Chromebook 1st", "Mac OS");
-		s2 = new Stall("CB0012", "SAMSUNG Chromebook 4+", "Win 10");
-		s3 = new Stall("CB0013", "HUAWEI Magicbook 100+", "Mac 10");
+		A1 = new Account("Alice", "111", "Staff");
+		A2 = new Account("Bob", "222", "Staff");
+		A3 = new Account("Chloe", "333", "Customer");
+		A4 = new Account("David", "444", "Customer");
+		s1 = new Stall("MacAte");
+		s2 = new Stall("CoolMeat");
+		s3 = new Stall("IAte");
 
 		AccountList= new ArrayList<Account>();
 		StallList= new ArrayList<Stall>();
@@ -269,14 +271,15 @@ public class TastyBiteTest {
 
 	@After
 	public void tearDown() throws Exception {
-		cc1 = null;
-		cc2 = null;
-		cc3 = null;
-		cb1 = null;
-		cb2 = null;
-		cb3 = null;
-		camcorderList = null;
-		chromebookList = null;
+		A1 = null;
+		A2 = null;
+		A3 = null;
+		A4 = null;
+		s1 = null;
+		s2 = null;
+		s3 = null;
+		AccountList = null;
+		StallList = null;
 
 	}
 
