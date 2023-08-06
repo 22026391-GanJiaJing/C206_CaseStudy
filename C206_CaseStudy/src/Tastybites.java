@@ -8,11 +8,27 @@ public class Tastybites {
 		ArrayList<Stall> StallList = new ArrayList<Stall>();
 		ArrayList<Account> QueueList = new ArrayList<Account>();
 		ArrayList<MenuItem> Cart = new ArrayList<MenuItem>();
+		ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
 		AccountList.add(new Account("bob", "111", "Customer"));
 		AccountList.add(new Account("alice", "222", "Staff"));
-		StallList.add(new Stall("MacKfc"));
-		StallList.add(new Stall("BurgerWing"));
+
+		ArrayList<MenuItem> menuList1=new ArrayList<MenuItem>();
+		ArrayList<MenuItem> menuList2=new ArrayList<MenuItem>();
+
+		menuList1.add(new MenuItem("chicken rice",4.50));
+		menuList1.add(new MenuItem("maggie",5.50));
+		menuList1.add(new MenuItem("chicken cutlet",8.50));
+		menuList1.add(new MenuItem("chicken porriage",2.50));
+
+		menuList2.add(new MenuItem("Duck rice",4.50));
+		menuList2.add(new MenuItem("Noodles",5.50));
+		menuList2.add(new MenuItem("Roasted Duck",8.50));
+		menuList2.add(new MenuItem("Duck porriage",2.50));
+
+
+		StallList.add(new Stall("MacKfc",menuList1));
+		StallList.add(new Stall("BurgerWing",menuList2));
 
 
 
@@ -56,10 +72,10 @@ public class Tastybites {
 				} else {
 					System.out.println("Invalid option");}}
 
-			//for staff
+			//for staff============================================================================================================================
 			if(used.getRole().equalsIgnoreCase("staff")){
 				option = 0;
-				while (option != 3 && loginprocess==true) {
+				while (option != 8 && loginprocess==true) {
 
 					Tastybites.Staffmenu();
 					option = Helper.readInt("Enter an option > ");
@@ -76,62 +92,52 @@ public class Tastybites {
 
 					}else if (option == 3) {
 						// Delete Stalls && display
-						ViewAllStalls(StallList);
-
-						String SelectStall=Helper.readString("Name of Stall You Want to Delete: ");
-
-						boolean found=false;
-
-						for (Stall a : StallList) {
-							if(a.getName().equalsIgnoreCase(SelectStall)) {
-								StallList.remove(a);
-								found=true;
-								System.out.println("Stall deleted");
-							}
-						}
-						if (found==false) {
-							System.out.println("Stall not found");
-						}
+						DeleteStall(StallList);
 
 
 					}
 					else if (option == 4) {
-						ViewAllStalls(StallList);
-						String stallchoose=Helper.readString("Choose Stall to Edit: " );
-
-
+						//edit menu
+						EditMenu(StallList);
 
 					}
 					else if (option == 5) {
 						// view queues choose to delete queue (completed order)
-						System.out.println(String.format("%-20s%s", "NAME"));
+						System.out.println(String.format("%-20s", "NAME"));
 						for (Account a : QueueList) {
-							System.out.println(String.format("%-20s%s", a.getName()));
+							System.out.println(String.format("%-20s", a.getName()));
 						}
 
 					}
 					else if (option == 6) {
-						// view all feedback
+						// view all feedback 
+						
 						for (Stall a : StallList) {
-							System.out.println(String.format("%-20s%s", a.getName()));
+							System.out.println(String.format("%-20s", a.getName()));
 						}
-
+						String ChooseStall=Helper.readString("Choose Stall to See Feedback > ");
+						
+						for (Stall a : StallList) {
+							if(a.getName().equalsIgnoreCase(ChooseStall)) {
+								for(Feedback b:feedbackList) {
+									if (b.getAcc().equals(a)) {
+										System.out.println(String.format("%-20s%-20s%-20.2f",b.getAcc().getName(), b.getFeedback(),b.getRating()));
+									}
+								}
+							}
+						}
+						
+						
 					}
+					
+					
+					
+					
+					
 					else if (option == 7) {
 						// Delete Account
 
-						Helper.line(100, "-");
-						char choice=Helper.readChar("Are you sure to delete Account?(Y/N) > ");
-						Helper.line(100, "-");
-						if(choice=='Y') {
-
-
-							for (Account a : AccountList) {
-								if(a.getName().equalsIgnoreCase(name)) {
-									AccountList.remove(a);
-									System.out.println("Stall deleted");
-									loginprocess=false;
-								}}}
+						loginprocess = DeleteAccount(AccountList, loginprocess, name);
 
 					}
 
@@ -141,9 +147,9 @@ public class Tastybites {
 						System.out.println("Invalid option");}}
 			}
 			else if(used.getRole().equalsIgnoreCase("customer")) {
-				//for customer
+				//for customer=============================================================================================================================
 				option = 0;
-				while (option != 3 && loginprocess==true) {
+				while (option != 7 && loginprocess==true) {
 
 					Tastybites.Customermenu();
 					option = Helper.readInt("Enter an option > ");
@@ -151,147 +157,169 @@ public class Tastybites {
 					if (option == 1) {
 						// Delete Account
 
-						Helper.line(100, "-");
-						char choice=Helper.readChar("Are you sure to delete Account?(Y/N) > ");
-						Helper.line(100, "-");
-						if(choice=='Y') {
-
-
-							for (Account a : AccountList) {
-								if(a.getName().equalsIgnoreCase(name)) {
-									AccountList.remove(a);
-									System.out.println("Stall deleted");
-									loginprocess=false;
-								}
-							}
-						}
+						loginprocess = DeleteAccount(AccountList, loginprocess, name);
 
 					} else if (option == 2) {
-						ViewAllStalls(StallList);
+						//view all stalls / add to cart /remove from cart/ view cart/make payment
+						int stalloption=999;
+						while (stalloption !=0 ) {
+							ViewAllStalls(StallList);
+							
+							stalloption = Helper.readInt("Enter an Stall Number > ");
+						}
 
-					} else if (option == 3) {
-						//Add to cart
-						ViewCart(Cart);
-
-
-
-					}
-					else if (option == 4) {
-						//Delete from cart
-						ViewCart(Cart);
-
-
-
-					}
-					else if (option == 5) {
-						//View cart 
-						ViewCart(Cart);
+				}else if (option == 3) {
+					System.out.println("Closing System");
+				} else {
+					System.out.println("Invalid option");}}
 
 
-
-					}
-					else if (option == 6) {
-						//make payment (add to queue)
-						ViewCart(Cart);
-
-
-
-					}else if (option == 7) {
-						System.out.println("Closing System");
-					} else {
-						System.out.println("Invalid option");}}
-
-
-
-			}
 
 		}
+
 	}
+}
 
 	/**
-	 * @param Cart
+	 * @param AccountList
+	 * @param loginprocess
+	 * @param name
+	 * @return
 	 */
-	private static void ViewCart(ArrayList<MenuItem> Cart) {
+	private static boolean DeleteAccount(ArrayList<Account> AccountList, boolean loginprocess, String name) {
 		Helper.line(100, "-");
-		System.out.println(String.format("%-20s%s", "NAME"));
-		for (MenuItem a:Cart) {
+		char choice=Helper.readChar("Are you sure to delete Account?(Y/N) > ");
+		Helper.line(100, "-");
+		if(choice=='Y') {
 
-			System.out.println(String.format("%-20s%s", a.getName()));
-		}
-		Helper.line(100, "-");
+
+			for (Account a : AccountList) {
+				if(a.getName().equalsIgnoreCase(name)) {
+					AccountList.remove(a);
+					System.out.println("Stall deleted");
+					loginprocess=false;
+				}}}
+		return loginprocess;
 	}
 
 	/**
 	 * @param StallList
 	 */
-	private static void ViewAllStalls(ArrayList<Stall> StallList) {
-		Helper.line(100, "-");
-		System.out.println(String.format("%-20s%s", "NAME"));
+	private static void EditMenu(ArrayList<Stall> StallList) {
+		ViewAllStalls(StallList);
+		
+		String stallchoose=Helper.readString("Choose Stall to Edit: " );
+		boolean found=false;
 		for (Stall a : StallList) {
-			System.out.println(String.format("%-20s%s", a.getName()));
+			if(a.getName().equalsIgnoreCase(stallchoose)) {
+				found=true;
+
+			}
 		}
-		Helper.line(100, "-");
 	}
 
 	/**
-	 * @param AccountList
+	 * @param StallList
 	 */
-	private static void ViewAllAccount(ArrayList<Account> AccountList) {
-		Helper.line(100, "-");
-		System.out.println(String.format("%-20s%s", "NAME", "ROLE"));
-		for (Account a : AccountList) {
-			System.out.println(String.format("%-20s%s", a.getName(), a.getRole()));
+	private static void DeleteStall(ArrayList<Stall> StallList) {
+		ViewAllStalls(StallList);
+
+		String SelectStall=Helper.readString("Name of Stall You Want to Delete: ");
+
+		boolean found=false;
+
+		for (Stall a : StallList) {
+			if(a.getName().equalsIgnoreCase(SelectStall)) {
+				StallList.remove(a);
+				found=true;
+				System.out.println("Stall deleted");
+			}
 		}
-		Helper.line(100, "-");
+		if (found==false) {
+			System.out.println("Stall not found");
+		}
 	}
 
-	/**
-	 * @param AccountList
-	 */
-	private static void CreateAccount(ArrayList<Account> AccountList) {
-		String name =Helper.readString("Name: ");
-		String password=Helper.readString("Password: ");
-		String role=Helper.readString("Role (Staff/Customer): ");
-		role.toLowerCase();
-		AccountList.add(new Account(name,password,role));
+/**
+ * @param Cart
+ */
+private static void ViewCart(ArrayList<MenuItem> Cart) {
+	Helper.line(100, "-");
+	System.out.println(String.format("%-20s", "NAME"));
+	for (MenuItem a:Cart) {
+
+		System.out.println(String.format("%-20s", a.getName()));
 	}
+	Helper.line(100, "-");
+}
 
-
-
-
-	public static void Mainmenu() {
-		System.out.println("Tasty Bites!");
-		System.out.println("1. Create New Account");
-		System.out.println("2. Login");
-		System.out.println("3. Quit");
-		Helper.line(80, "-");
-
+/**
+ * @param StallList
+ */
+private static void ViewAllStalls(ArrayList<Stall> StallList) {
+	Helper.line(100, "-");
+	System.out.println(String.format("%-20s", "NAME"));
+	for (Stall a : StallList) {
+		System.out.println(String.format("%-20s", a.getName()));
 	}
-	public static void Staffmenu() {
-		System.out.println("Tasty Bites!");
-		System.out.println("1. View all Accounts");
-		System.out.println("2. Add New Stall");
-		System.out.println("3. Delete Stall");
-		System.out.println("4. Edit Menu");
-		System.out.println("5. Edit Queue");
-		System.out.println("6. View Feedback");
-		System.out.println("7. Delete my Account");
-		System.out.println("8. Quit");
-		Helper.line(80, "-");
+	Helper.line(100, "-");
+}
 
+/**
+ * @param AccountList
+ */
+private static void ViewAllAccount(ArrayList<Account> AccountList) {
+	Helper.line(100, "-");
+	System.out.println(String.format("%-20s", "NAME", "ROLE"));
+	for (Account a : AccountList) {
+		System.out.println(String.format("%-20s", a.getName(), a.getRole()));
 	}
-	public static void Customermenu() {
-		System.out.println("Tasty Bites!");
-		System.out.println("1. Delete my Account");
-		System.out.println("2. View Stalls");
-		System.out.println("3. Add to Cart");
-		System.out.println("4. Remove to Cart");
-		System.out.println("5. View Cart");
-		System.out.println("6. Make Payment");
-		System.out.println("7. Quit");
-		Helper.line(80, "-");
+	Helper.line(100, "-");
+}
 
-	}
+/**
+ * @param AccountList
+ */
+private static void CreateAccount(ArrayList<Account> AccountList) {
+	String name =Helper.readString("Name: ");
+	String password=Helper.readString("Password: ");
+	String role=Helper.readString("Role (Staff/Customer): ");
+	role.toLowerCase();
+	AccountList.add(new Account(name,password,role));
+}
+
+
+
+
+public static void Mainmenu() {
+	System.out.println("Tasty Bites!");
+	System.out.println("1. Create New Account");
+	System.out.println("2. Login");
+	System.out.println("3. Quit");
+	Helper.line(80, "-");
+
+}
+public static void Staffmenu() {
+	System.out.println("Tasty Bites!");
+	System.out.println("1. View all Accounts");
+	System.out.println("2. Add New Stall");
+	System.out.println("3. Delete Stall");
+	System.out.println("4. Edit Menu");
+	System.out.println("5. Edit Queue");
+	System.out.println("6. View Feedback");
+	System.out.println("7. Delete my Account");
+	System.out.println("8. Quit");
+	Helper.line(80, "-");
+
+}
+public static void Customermenu() {
+	System.out.println("Tasty Bites!");
+	System.out.println("1. Delete my Account");
+	System.out.println("2. View Stalls");
+	System.out.println("3. Quit");
+	Helper.line(80, "-");
+
+}
 
 }
 
