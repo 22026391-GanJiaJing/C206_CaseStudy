@@ -152,7 +152,7 @@ public class Tastybites {
 						// Delete Account
 
 						Helper.line(100, "-");
-						choice=Helper.readChar("Are you sure to delete Account?(Y/N) > ");
+						char choice=Helper.readChar("Are you sure to delete Account?(Y/N) > ");
 						Helper.line(100, "-");
 						if(choice=='Y') {
 
