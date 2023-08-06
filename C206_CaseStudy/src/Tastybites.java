@@ -131,9 +131,9 @@ public class Tastybites {
 									AccountList.remove(a);
 									System.out.println("Stall deleted");
 									loginprocess=false;
-								}
-							
-						
+								}}}
+
+					}
 
 					else if (option == 8 ) {
 						System.out.println("Closing System");
