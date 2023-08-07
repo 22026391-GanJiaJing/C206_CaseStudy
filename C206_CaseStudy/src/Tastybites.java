@@ -6,7 +6,7 @@ public class Tastybites {
 
 		ArrayList<Account> AccountList = new ArrayList<Account>();
 		ArrayList<Stall> StallList = new ArrayList<Stall>();
-		ArrayList<Account> QueueList = new ArrayList<Account>();
+		ArrayList<Queue> QueueList = new ArrayList<Queue>();
 		ArrayList<MenuItem> Cart = new ArrayList<MenuItem>();
 		ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
@@ -175,9 +175,16 @@ public class Tastybites {
 					else if (option == 4) {
 						// view queues choose to delete queue (completed order)
 						System.out.println(String.format("%-20s", "NAME"));
-						for (Account a : QueueList) {
-							System.out.println(String.format("%-20s", a.getName()));
+						int i=1;
+						String allCart="";
+						for(Queue a:QueueList) {
+							for(MenuItem b:a.getCart()) {
+								allCart+=b.getName()+"\n";
+							}
+							System.out.println(String.format("%-20d%-20s%-20s",i,a.getPerson().getName(),allCart));
+							i++;
 						}
+						
 
 					}
 					else if (option == 5) {
@@ -239,8 +246,8 @@ public class Tastybites {
 
 					} else if (option == 2) {
 						//view all stalls / add to cart /remove from cart/ view cart/make payment
-						int done=999;
-						while (done !=0 ) {
+						int foodoption=99;
+						while ( foodoption!=4) {
 							ViewAllStalls(StallList);
 
 							int stalloption = Helper.readInt("Enter an Stall Number(Enter 0 to exit) > ");
@@ -253,16 +260,22 @@ public class Tastybites {
 									found=true;
 								}
 							}
-							if(found==false) {
+							if(stalloption==0) {
+								break;
+							}
+							else if(found==false) {
 								System.out.println("Stall not Found");
+								break;
 							}else {
 								i=1;
-								for(MenuItem b:Selected.getMenu()) {
-									System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
-									i++;
-								}
-								int foodoption=99;
-								while(foodoption!=5) {
+								
+								
+								while(foodoption!=5 && foodoption!=4) {
+									i=1;
+									for(MenuItem b:Selected.getMenu()) {
+										System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
+										i++;
+									}
 									System.out.println("Tasty Bites!");
 									System.out.println("1. Add to Cart");
 									System.out.println("2. Remove from Cart");
@@ -277,30 +290,52 @@ public class Tastybites {
 										int Menuname =Helper.readInt("Menu Item to add to cart(Number) > ");
 										
 										Cart.add(new MenuItem(Selected.getMenu().get(Menuname-1).getName(),Selected.getMenu().get(Menuname-1).getPrice()));
+										for(MenuItem a:Cart) {
+											System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
+										}
 									}else if (foodoption==2) {//remove from cart
-										if(Cart==null) {
+										if(Cart.size()==0) {
 											System.out.println("Cannot remove empty cart");
 										}else {
+											for(MenuItem a:Cart) {
+												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
+											}
 											int Menuname =Helper.readInt("Menu Item to remove from to cart(Number) > ");
-											
+											for(MenuItem a:Cart) {
+												if(Cart.indexOf(a)==Menuname-1){
+													Cart.remove(Menuname-1);
+													break;
+												}
+											}
 										}
 									}
 									else if (foodoption==3) {//view cart
-										if(Cart==null) {
+										if(Cart.size()==0) {
 											System.out.println("Cannot View empty cart");
 										}else {
 											
 											for(MenuItem a:Cart) {
-												
+												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
 											}
 										}
 									}
 									else if (foodoption==4) {//Make payment
-										if(Cart==null) {
+										if(Cart.size()==0) {
 											System.out.println("Cart is Empty");
 										}else {
+											QueueList.add(new Queue(used,Cart));
+											int Qno=0;
+											for(Queue a:QueueList) {
+												if(a.getPerson()==used) {
+													Qno=QueueList.indexOf(a)+1;
+												}
+											}
 											
+											Cart.clear();
+											
+											System.out.println("Your Queue Number is "+Qno);
 										}
+										break;
 									}
 									else if(foodoption==5) {
 										break;
@@ -356,25 +391,6 @@ public class Tastybites {
 	/**
 	 * @param StallList
 	 */
-	private static void EditMenu(ArrayList<Stall> StallList) {
-		ViewAllStalls(StallList);
-
-		String stallchoose=Helper.readString("Choose Stall to Edit: " );
-		boolean found=false;
-		for (Stall a : StallList) {
-			if(a.getName().equalsIgnoreCase(stallchoose)) {
-				found=true;
-
-			}
-		}
-		if (found==false) {
-			System.out.println("Stall not found");
-		}
-	}
-
-	/**
-	 * @param StallList
-	 */
 	private static void DeleteStall(ArrayList<Stall> StallList) {
 
 		int SelectStall=Helper.readInt("Stall number to Delete: ");
@@ -395,18 +411,7 @@ public class Tastybites {
 		}
 	}
 
-	/**
-	 * @param Cart
-	 */
-	private static void ViewCart(ArrayList<MenuItem> Cart) {
-		Helper.line(100, "-");
-		System.out.println(String.format("%-20s", "NAME"));
-		for (MenuItem a:Cart) {
 
-			System.out.println(String.format("%-20s", a.getName()));
-		}
-		Helper.line(100, "-");
-	}
 
 	/**
 	 * @param StallList
