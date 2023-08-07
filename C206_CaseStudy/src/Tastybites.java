@@ -27,8 +27,8 @@ public class Tastybites {
 		menuList2.add(new MenuItem("Duck porriage",2.50));
 
 
-		StallList.add(new Stall("MacKfc",1,menuList1));
-		StallList.add(new Stall("BurgerWing",2,menuList2));
+		StallList.add(new Stall("MacKfc",menuList1));
+		StallList.add(new Stall("BurgerWing",menuList2));
 
 
 
@@ -94,10 +94,9 @@ public class Tastybites {
 
 						if(Secoption==1) {// add 
 							String stallname =Helper.readString("Store Name: ");
-							int stallNo =Helper.readInt("Store Number: ");
 
 							ArrayList<MenuItem> NewMenu=new ArrayList<MenuItem>();
-							StallList.add(new Stall(stallname,stallNo,NewMenu));
+							StallList.add(new Stall(stallname,NewMenu));
 							System.out.println("Stall added");
 						}else if(Secoption==2) {//delete
 							DeleteStall(StallList);
@@ -118,7 +117,7 @@ public class Tastybites {
 							boolean found=false;
 							Stall stallSelected = null;
 							for(Stall a:StallList) {
-								if(a.getStoreNo()==stallNo) {
+								if(StallList.indexOf(a)==stallNo) {
 									found=true;
 									stallSelected=a;
 									break;
@@ -144,7 +143,7 @@ public class Tastybites {
 							boolean found=false;
 							Stall stallSelected = null;
 							for(Stall a:StallList) {
-								if(a.getStoreNo()==stallNo) {
+								if(StallList.indexOf(a)==stallNo) {
 									found=true;
 									stallSelected=a;
 									break;
@@ -247,8 +246,9 @@ public class Tastybites {
 							int stalloption = Helper.readInt("Enter an Stall Number(Enter 0 to exit) > ");
 							boolean found=false;
 							Stall Selected=null;
+							int i=1;
 							for(Stall a:StallList) {
-								if(a.getStoreNo()==stalloption) {
+								if(StallList.indexOf(a)==stalloption-1) {
 									Selected=a;
 									found=true;
 								}
@@ -256,7 +256,7 @@ public class Tastybites {
 							if(found==false) {
 								System.out.println("Stall not Found");
 							}else {
-								int i=1;
+								i=1;
 								for(MenuItem b:Selected.getMenu()) {
 									System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
 									i++;
@@ -273,6 +273,7 @@ public class Tastybites {
 									foodoption=Helper.readInt("Enter an option > ");
 									
 									if(foodoption==1) {//add to cart
+			
 										int Menuname =Helper.readInt("Menu Item to add to cart(Number) > ");
 										
 										Cart.add(new MenuItem(Selected.getMenu().get(Menuname-1).getName(),Selected.getMenu().get(Menuname-1).getPrice()));
@@ -280,6 +281,7 @@ public class Tastybites {
 										if(Cart==null) {
 											System.out.println("Cannot remove empty cart");
 										}else {
+											int Menuname =Helper.readInt("Menu Item to remove from to cart(Number) > ");
 											
 										}
 									}
@@ -288,6 +290,9 @@ public class Tastybites {
 											System.out.println("Cannot View empty cart");
 										}else {
 											
+											for(MenuItem a:Cart) {
+												
+											}
 										}
 									}
 									else if (foodoption==4) {//Make payment
@@ -377,7 +382,7 @@ public class Tastybites {
 		boolean found=false;
 
 		for (Stall a : StallList) {
-			if(a.getStoreNo()==SelectStall) {
+			if(StallList.indexOf(a)==SelectStall-1) {
 
 				StallList.remove(StallList.indexOf(a));
 				found=true;
@@ -409,8 +414,9 @@ public class Tastybites {
 	private static void ViewAllStalls(ArrayList<Stall> StallList) {
 		Helper.line(100, "-");
 		System.out.println(String.format("%-20s%-20s", "STALL","STALL NUMBER"));
+		int i=1;
 		for (Stall a : StallList) {
-			System.out.println(String.format("%-20s%-20d", a.getName(),a.getStoreNo()));
+			System.out.println(String.format("%-20s%-20d", a.getName(),i++));
 		}
 		Helper.line(100, "-");
 	}
