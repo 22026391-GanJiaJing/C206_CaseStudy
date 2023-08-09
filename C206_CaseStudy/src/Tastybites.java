@@ -140,19 +140,25 @@ public class Tastybites {
 						// view all feedback 
 
 						ViewAllStalls(StallList);
-						String ChooseStall=Helper.readString("Choose Stall to See Feedback > ");
-
-						for (Stall a : StallList) {
-							if(a.getName().equalsIgnoreCase(ChooseStall)) {
-								for(Feedback b:feedbackList) {
-									if (b.getAcc().equals(a)) {
-										System.out.println(String.format("%-20s%-20s%-20.2f",b.getAcc().getName(), b.getFeedback(),b.getRating()));
-									}
-								}
+						int ChooseStall=Helper.readInt("Choose Stall to See Feedback > ");
+						
+						boolean found=false;
+						Stall Selected=null;
+						for(Stall a:StallList) {
+							if(StallList.indexOf(a)==ChooseStall-1) {
+								Selected=a;
+								found=true;
 							}
 						}
-
-
+						if(found==false) {
+							System.out.println("Stall not Found");
+						}
+						int i=1;
+						for(Feedback a:feedbackList) {
+							if(a.getStall()==Selected) {
+								System.out.println(String.format("%-10d%-10s%-10s%-10d",i,a.getAcc().getName(),a.getFeedback(),a.getRating() ));
+							}
+						}
 
 
 
@@ -188,7 +194,7 @@ public class Tastybites {
 			else if(used.getRole().equalsIgnoreCase("customer")) {
 				//for customer=============================================================================================================================
 				option = 0;
-				while (option != 4 && loginprocess==true) {
+				while (option != 5 && loginprocess==true) {
 
 					Tastybites.Customermenu();
 					option = Helper.readInt("Enter an option > ");
@@ -313,10 +319,11 @@ public class Tastybites {
 
 						int feedbackoption=Helper.readInt("Enter an Option > ");
 						while (feedbackoption!=4) {
+							
 							if (feedbackoption==1) {
 								//add
 								ViewAllStalls(StallList);
-								int stalloption = Helper.readInt("Enter an Stall Number(Enter 0 to exit) > ");
+								int stalloption = Helper.readInt("Enter an Stall Number > ");
 								boolean found=false;
 								Stall Selected=null;
 								for(Stall a:StallList) {
@@ -342,6 +349,22 @@ public class Tastybites {
 							}else if (feedbackoption==2) {
 								//delete
 								ViewMyFeedbacks(feedbackList, used);
+								ArrayList<Feedback> myFeedback=new ArrayList<>();
+								int stalloption = Helper.readInt("Enter Feedback To Delete > ");
+								
+								for(Feedback a:feedbackList) {
+									if(a.getAcc()==used) {
+										myFeedback.add(a);
+									}
+								}
+								for(Feedback a:myFeedback) {
+									if(stalloption-1==myFeedback.indexOf(a)) {
+										myFeedback.remove(a);
+										feedbackList.remove(a);
+										System.out.println("Feedback Deleted");
+									}
+										break;
+								}
 							}
 							else if (feedbackoption==3) {
 								//view
@@ -353,8 +376,8 @@ public class Tastybites {
 							}else {
 								System.out.println("Invalid Option");
 							}
-
-
+							FeedbackOptions();
+							feedbackoption=Helper.readInt("Enter an Option > ");
 
 
 
@@ -385,9 +408,10 @@ public class Tastybites {
 	 * @param used
 	 */
 	private static void ViewMyFeedbacks(ArrayList<Feedback> feedbackList, Account used) {
+		int i=1;
 		for(Feedback a:feedbackList) {
 			if(a.getAcc()==used) {
-				System.out.println(String.format("%s%s%d",a.getAcc().getName(),a.getFeedback(),a.getRating() ));
+				System.out.println(String.format("%-10d%-10s%-10s%-10d",i,a.getAcc().getName(),a.getFeedback(),a.getRating() ));
 			}
 		}
 	}
@@ -399,7 +423,7 @@ public class Tastybites {
 		System.out.println("1. Add Feedback");
 		System.out.println("2. Delete Feedback");
 		System.out.println("3. View All My Feedbacks");
-		System.out.println("4. Quit");
+		System.out.println("4. Back");
 	}
 
 	/**
