@@ -86,22 +86,7 @@ public class Tastybites {
 
 					} else if (option == 2) {
 						// Add new stall && display
-						ViewAllStalls(StallList);
-						System.out.println("Tasty Bites!");
-						System.out.println("1. Add new Stall");
-						System.out.println("2. Delete Stall");
-						int Secoption =Helper.readInt("Enter an option > ");
-
-						if(Secoption==1) {// add 
-							String stallname =Helper.readString("Store Name: ");
-
-							ArrayList<MenuItem> NewMenu=new ArrayList<MenuItem>();
-							StallList.add(new Stall(stallname,NewMenu));
-							System.out.println("Stall added");
-						}else if(Secoption==2) {//delete
-							DeleteStall(StallList);
-						} else {
-							System.out.println("Invalid option");}
+						AddStall(StallList);
 
 
 
@@ -113,57 +98,10 @@ public class Tastybites {
 						int Secoption =Helper.readInt("Enter an option > ");
 
 						if(Secoption==1) {// add 
-							int stallNo =Helper.readInt("Store Number: ");
-							boolean found=false;
-							Stall stallSelected = null;
-							for(Stall a:StallList) {
-								if(StallList.indexOf(a)==stallNo) {
-									found=true;
-									stallSelected=a;
-									break;
-								}
-							}
-							if(found==false) {
-								System.out.println("Stall Not Found");
-							}else {
-								int i=1;
-								for(MenuItem b:stallSelected.getMenu()) {
-									System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
-									i++;
-								}
-								String Menuname =Helper.readString("Menu item Name: ");
-								double MenuPrice =Helper.readDouble("Menu item Price: $");
-
-								stallSelected.getMenu().add(new MenuItem(Menuname, MenuPrice));
-								System.out.println("Menu added");
-							}
+							AddMenu(StallList);
 							
 						}else if(Secoption==2) {//delete
-							int stallNo =Helper.readInt("Store Number: ");
-							boolean found=false;
-							Stall stallSelected = null;
-							for(Stall a:StallList) {
-								if(StallList.indexOf(a)==stallNo) {
-									found=true;
-									stallSelected=a;
-									break;
-								}
-							}
-							if(found==false) {
-								System.out.println("Stall Not Found");
-							}else {
-								int i=1;
-								for(MenuItem b:stallSelected.getMenu()) {
-									System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
-									i++;
-								}
-								int Menuname =Helper.readInt("Menu Item to Delete(Number) > ");
-								
-								stallSelected.getMenu().remove(Menuname-1);
-
-							
-								System.out.println("Menu Deleted");
-							}
+							DeleteMenu(StallList);
 			
 
 						}
@@ -184,6 +122,17 @@ public class Tastybites {
 							System.out.println(String.format("%-20d%-20s%-20s",i,a.getPerson().getName(),allCart));
 							i++;
 						}
+						if(Cart.isEmpty()) {
+							int QueueNo=Helper.readInt("Enter Queue Number to Remove > ");
+							if (QueueNo<=QueueList.size()) {
+								QueueList.remove(QueueNo-1);
+								System.out.println("Queue Number Removed");
+							}else {
+								System.out.println(QueueList.size());
+								System.out.println("No Such Queue Number");
+							}
+						}
+						
 						
 
 					}
@@ -202,6 +151,8 @@ public class Tastybites {
 								}
 							}
 						}
+				
+						
 
 
 					}
@@ -364,6 +315,89 @@ public class Tastybites {
 			}
 
 		}
+	}
+
+	/**
+	 * @param StallList
+	 */
+	private static void DeleteMenu(ArrayList<Stall> StallList) {
+		int stallNo =Helper.readInt("Store Number: ");
+		boolean found=false;
+		Stall stallSelected = null;
+		for(Stall a:StallList) {
+			if(StallList.indexOf(a)==stallNo) {
+				found=true;
+				stallSelected=a;
+				break;
+			}
+		}
+		if(found==false) {
+			System.out.println("Stall Not Found");
+		}else {
+			int i=1;
+			for(MenuItem b:stallSelected.getMenu()) {
+				System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
+				i++;
+			}
+			int Menuname =Helper.readInt("Menu Item to Delete(Number) > ");
+			
+			stallSelected.getMenu().remove(Menuname-1);
+
+		
+			System.out.println("Menu Deleted");
+		}
+	}
+
+	/**
+	 * @param StallList
+	 */
+	private static void AddMenu(ArrayList<Stall> StallList) {
+		int stallNo =Helper.readInt("Store Number: ");
+		boolean found=false;
+		Stall stallSelected = null;
+		for(Stall a:StallList) {
+			if(StallList.indexOf(a)==stallNo) {
+				found=true;
+				stallSelected=a;
+				break;
+			}
+		}
+		if(found==false) {
+			System.out.println("Stall Not Found");
+		}else {
+			int i=1;
+			for(MenuItem b:stallSelected.getMenu()) {
+				System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
+				i++;
+			}
+			String Menuname =Helper.readString("Menu item Name: ");
+			double MenuPrice =Helper.readDouble("Menu item Price: $");
+
+			stallSelected.getMenu().add(new MenuItem(Menuname, MenuPrice));
+			System.out.println("Menu added");
+		}
+	}
+
+	/**
+	 * @param StallList
+	 */
+	private static void AddStall(ArrayList<Stall> StallList) {
+		ViewAllStalls(StallList);
+		System.out.println("Tasty Bites!");
+		System.out.println("1. Add new Stall");
+		System.out.println("2. Delete Stall");
+		int Secoption =Helper.readInt("Enter an option > ");
+
+		if(Secoption==1) {// add 
+			String stallname =Helper.readString("Store Name: ");
+
+			ArrayList<MenuItem> NewMenu=new ArrayList<MenuItem>();
+			StallList.add(new Stall(stallname,NewMenu));
+			System.out.println("Stall added");
+		}else if(Secoption==2) {//delete
+			DeleteStall(StallList);
+		} else {
+			System.out.println("Invalid option");}
 	}
 
 	/**
