@@ -99,10 +99,10 @@ public class Tastybites {
 
 						if(Secoption==1) {// add 
 							AddMenu(StallList);
-							
+
 						}else if(Secoption==2) {//delete
 							DeleteMenu(StallList);
-			
+
 
 						}
 						else {
@@ -132,8 +132,8 @@ public class Tastybites {
 								System.out.println("No Such Queue Number");
 							}
 						}
-						
-						
+
+
 
 					}
 					else if (option == 5) {
@@ -151,8 +151,10 @@ public class Tastybites {
 								}
 							}
 						}
-				
-						
+
+
+
+
 
 
 					}
@@ -176,9 +178,10 @@ public class Tastybites {
 
 					else if (option == 8 ) {
 						System.out.println("Closing System");
+						System.exit(0);
 					} else {
 						System.out.println("Invalid option");
-						}
+					}
 				}
 			}
 
@@ -219,8 +222,8 @@ public class Tastybites {
 								break;
 							}else {
 								i=1;
-								
-								
+
+
 								while(foodoption!=5 && foodoption!=4) {
 									i=1;
 									for(MenuItem b:Selected.getMenu()) {
@@ -235,11 +238,11 @@ public class Tastybites {
 									System.out.println("5. Back");
 									Helper.line(80, "-");
 									foodoption=Helper.readInt("Enter an option > ");
-									
+
 									if(foodoption==1) {//add to cart
-			
+
 										int Menuname =Helper.readInt("Menu Item to add to cart(Number) > ");
-										
+
 										Cart.add(new MenuItem(Selected.getMenu().get(Menuname-1).getName(),Selected.getMenu().get(Menuname-1).getPrice()));
 										for(MenuItem a:Cart) {
 											System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
@@ -264,7 +267,7 @@ public class Tastybites {
 										if(Cart.size()==0) {
 											System.out.println("Cannot View empty cart");
 										}else {
-											
+
 											for(MenuItem a:Cart) {
 												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
 											}
@@ -281,9 +284,9 @@ public class Tastybites {
 													Qno=QueueList.indexOf(a)+1;
 												}
 											}
-											
+
 											Cart.clear();
-											
+
 											System.out.println("Your Queue Number is "+Qno);
 										}
 										break;
@@ -304,9 +307,69 @@ public class Tastybites {
 						loginprocess = false;
 
 					}
-
 					else if (option == 4) {
+						// edit feedback
+						FeedbackOptions();
+
+						int feedbackoption=Helper.readInt("Enter an Option > ");
+						while (feedbackoption!=4) {
+							if (feedbackoption==1) {
+								//add
+								ViewAllStalls(StallList);
+								int stalloption = Helper.readInt("Enter an Stall Number(Enter 0 to exit) > ");
+								boolean found=false;
+								Stall Selected=null;
+								for(Stall a:StallList) {
+									if(StallList.indexOf(a)==stalloption-1) {
+										Selected=a;
+										found=true;
+									}
+								}
+								if(found==false) {
+									System.out.println("Stall not found");
+								}else {
+									
+								
+								String feedback=Helper.readString("Enter Your Feedback > ");
+								int rating=Helper.readInt("Enter Your Rating(1-5) > ");
+								while(rating>5 ||rating<1) {
+									rating=Helper.readInt("Re-Enter Your Rating(1-5) > ");
+								}
+								feedbackList.add(new Feedback(used,feedback,rating,Selected));
+								System.out.println("Feedback Added");
+								
+								}
+							}else if (feedbackoption==2) {
+								//delete
+								ViewMyFeedbacks(feedbackList, used);
+							}
+							else if (feedbackoption==3) {
+								//view
+								ViewMyFeedbacks(feedbackList, used);
+							}
+
+							else if (feedbackoption==4) {
+								break;
+							}else {
+								System.out.println("Invalid Option");
+							}
+
+
+
+
+
+
+
+
+
+						}
+
+
+					}
+
+					else if (option == 5) {
 						System.out.println("Closing System");
+						System.exit(0);
 					} else {
 						System.out.println("Invalid option");}}
 
@@ -315,6 +378,28 @@ public class Tastybites {
 			}
 
 		}
+	}
+
+	/**
+	 * @param feedbackList
+	 * @param used
+	 */
+	private static void ViewMyFeedbacks(ArrayList<Feedback> feedbackList, Account used) {
+		for(Feedback a:feedbackList) {
+			if(a.getAcc()==used) {
+				System.out.println(String.format("%s%s%d",a.getAcc().getName(),a.getFeedback(),a.getRating() ));
+			}
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private static void FeedbackOptions() {
+		System.out.println("1. Add Feedback");
+		System.out.println("2. Delete Feedback");
+		System.out.println("3. View All My Feedbacks");
+		System.out.println("4. Quit");
 	}
 
 	/**
@@ -340,10 +425,10 @@ public class Tastybites {
 				i++;
 			}
 			int Menuname =Helper.readInt("Menu Item to Delete(Number) > ");
-			
+
 			stallSelected.getMenu().remove(Menuname-1);
 
-		
+
 			System.out.println("Menu Deleted");
 		}
 	}
@@ -512,7 +597,8 @@ public class Tastybites {
 		System.out.println("1. Delete my Account");
 		System.out.println("2. View Stalls");
 		System.out.println("3. Logout");
-		System.out.println("4. Quit");
+		System.out.println("4. Edit Feedback");
+		System.out.println("5. Quit");
 		Helper.line(80, "-");
 
 	}
