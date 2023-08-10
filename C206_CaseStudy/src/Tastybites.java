@@ -115,28 +115,30 @@ public class Tastybites {
 
 					else if (option == 4) {
 						// view queues choose to delete queue (completed order)
-						System.out.println(String.format("%-20s", "NAME"));
-						int i=1;
-						String allCart="";
-						for(Queue a:QueueList) {
-							for(MenuItem b:a.getCart()) {
-								allCart+=b.getName()+"\n";
+						if(QueueList.isEmpty()) {
+							System.out.println("Queue is empty");
+						}else {
+							int i=1;
+							String allCart="";
+							for(Queue a:QueueList) {
+								for(MenuItem b:a.getCart()) {
+									allCart+=b.getName()+"\n";
+								}
+								System.out.println(String.format("%-20d%-20s%-20s",i,a.getPerson().getName(),allCart));
+								i++;
 							}
-							System.out.println(String.format("%-20d%-20s%-20s",i,a.getPerson().getName(),allCart));
-							i++;
-						}
-						if(Cart.isEmpty()) {
-							int QueueNo=Helper.readInt("Enter Queue Number to Remove > ");
-							if (QueueNo<=QueueList.size()) {
-								QueueList.remove(QueueNo-1);
-								System.out.println("Queue Number Removed");
-							}else {
-								System.out.println(QueueList.size());
-								System.out.println("No Such Queue Number");
+							if(Cart.isEmpty()) {
+								int QueueNo=Helper.readInt("Enter Queue Number to Remove > ");
+								if (QueueNo<=QueueList.size()) {
+									QueueList.remove(QueueNo-1);
+									System.out.println("Queue Number Removed");
+								}else {
+									System.out.println(QueueList.size());
+									System.out.println("No Such Queue Number");
+								}
 							}
+
 						}
-
-
 
 					}
 					else if (option == 5) {
@@ -144,7 +146,7 @@ public class Tastybites {
 
 						ViewAllStalls(StallList);
 						int ChooseStall=Helper.readInt("Choose Stall to See Feedback > ");
-						
+
 						boolean found=false;
 						Stall Selected=null;
 						for(Stall a:StallList) {
@@ -155,16 +157,29 @@ public class Tastybites {
 						}
 						if(found==false) {
 							System.out.println("Stall not Found");
-						}
-						int i=1;
-						for(Feedback a:feedbackList) {
-							if(a.getStall()==Selected) {
-								System.out.println(String.format("%-10d%-10s%-10s%-10d",i,a.getAcc().getName(),a.getFeedback(),a.getRating() ));
+						}else {
+							boolean ffound=false;
+							for(Feedback a:feedbackList) {
+								if(a.getStall()==Selected) {
+									ffound=true;
+								}
+							}
+							if (ffound==false) {
+								System.out.println("No Feedback Found");
+							}
+							else {
+
+
+								int i=1;
+								System.out.println(String.format("%-5s%-5s%-30s%-10s","No","USER","FEEDBACK","RATING" ));
+								for(Feedback a:feedbackList) {
+									if(a.getStall()==Selected) {
+										System.out.println(String.format("%-5d%-5s%-30s%-10d",i,a.getAcc().getName(),a.getFeedback(),a.getRating() ));
+									}
+								}
+
 							}
 						}
-
-
-
 
 					}
 
@@ -267,6 +282,7 @@ public class Tastybites {
 										if(Cart.size()==0) {
 											System.out.println("Cannot remove empty cart");
 										}else {
+											System.out.println(String.format(  "%-20s%-20s","ITEM","PRICE"));
 											for(MenuItem a:Cart) {
 												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
 											}
@@ -283,6 +299,7 @@ public class Tastybites {
 										if(Cart.size()==0) {
 											System.out.println("Cannot View empty cart");
 										}else {
+											System.out.println(String.format(  "%-20s%-20s","ITEM","PRICE"));
 
 											for(MenuItem a:Cart) {
 												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
@@ -300,6 +317,13 @@ public class Tastybites {
 													Qno=QueueList.indexOf(a)+1;
 												}
 											}
+											double total=0;
+											System.out.println(String.format(  "%-20s%-20s","ITEM","PRICE"));
+											for(MenuItem a:Cart) {
+												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
+												total+=a.getPrice();
+											}
+											System.out.println(String.format("Total: $%.2f",total));
 
 											Cart.clear();
 
@@ -329,7 +353,7 @@ public class Tastybites {
 
 						int feedbackoption=Helper.readInt("Enter an Option > ");
 						while (feedbackoption!=4) {
-							
+
 							if (feedbackoption==1) {
 								//add
 								ViewAllStalls(StallList);
@@ -345,35 +369,40 @@ public class Tastybites {
 								if(found==false) {
 									System.out.println("Stall not found");
 								}else {
-									
-								
-								String feedback=Helper.readString("Enter Your Feedback > ");
-								int rating=Helper.readInt("Enter Your Rating(1-5) > ");
-								while(rating>5 ||rating<1) {
-									rating=Helper.readInt("Re-Enter Your Rating(1-5) > ");
-								}
-								feedbackList.add(new Feedback(used,feedback,rating,Selected));
-								System.out.println("Feedback Added");
-								
+
+
+									String feedback=Helper.readString("Enter Your Feedback > ");
+									int rating=Helper.readInt("Enter Your Rating(1-5) > ");
+									while(rating>5 ||rating<1) {
+										rating=Helper.readInt("Re-Enter Your Rating(1-5) > ");
+									}
+									feedbackList.add(new Feedback(used,feedback,rating,Selected));
+									System.out.println("Feedback Added");
+
 								}
 							}else if (feedbackoption==2) {
 								//delete
 								ViewMyFeedbacks(feedbackList, used);
 								ArrayList<Feedback> myFeedback=new ArrayList<>();
-								int stalloption = Helper.readInt("Enter Feedback To Delete > ");
-								
+
+
 								for(Feedback a:feedbackList) {
 									if(a.getAcc()==used) {
 										myFeedback.add(a);
 									}
 								}
-								for(Feedback a:myFeedback) {
-									if(stalloption-1==myFeedback.indexOf(a)) {
-										myFeedback.remove(a);
-										feedbackList.remove(a);
-										System.out.println("Feedback Deleted");
-									}
+								if(myFeedback.isEmpty()) {
+									System.out.println("No Feedback Found from you");
+								}else {
+									int stalloption = Helper.readInt("Enter Feedback To Delete > ");
+									for(Feedback a:myFeedback) {
+										if(stalloption-1==myFeedback.indexOf(a)) {
+											myFeedback.remove(a);
+											feedbackList.remove(a);
+											System.out.println("Feedback Deleted");
+										}
 										break;
+									}
 								}
 							}
 							else if (feedbackoption==3) {
@@ -382,10 +411,10 @@ public class Tastybites {
 									System.out.println("No Feedback To View");
 								}
 								else {
-									
-								
-								ViewMyFeedbacks(feedbackList, used);
-							}}
+
+
+									ViewMyFeedbacks(feedbackList, used);
+								}}
 
 							else if (feedbackoption==4) {
 								break;
@@ -424,7 +453,7 @@ public class Tastybites {
 	 * @param feedbackList
 	 * @param used
 	 */
-	private static void ViewMyFeedbacks(ArrayList<Feedback> feedbackList, Account used) {
+	public static void ViewMyFeedbacks(ArrayList<Feedback> feedbackList, Account used) {
 		Helper.line(80,"-");
 		int i=1;
 		System.out.println(String.format("%-5s%-5s%-30s%-10s","No","USER","FEEDBACK","RATING" ));
@@ -439,7 +468,7 @@ public class Tastybites {
 	/**
 	 * 
 	 */
-	private static void FeedbackOptions() {
+	public static void FeedbackOptions() {
 		Helper.line(80,"-");
 		System.out.println("1. Add Feedback");
 		System.out.println("2. Delete Feedback");
@@ -451,7 +480,7 @@ public class Tastybites {
 	/**
 	 * @param StallList
 	 */
-	private static void DeleteMenu(ArrayList<Stall> StallList) {
+	public static void DeleteMenu(ArrayList<Stall> StallList) {
 		int stallNo =Helper.readInt("Store Number: ");
 		boolean found=false;
 		Stall stallSelected = null;
@@ -482,7 +511,7 @@ public class Tastybites {
 	/**
 	 * @param StallList
 	 */
-	private static void AddMenu(ArrayList<Stall> StallList) {
+	public static void AddMenu(ArrayList<Stall> StallList) {
 		int stallNo =Helper.readInt("Store Number: ");
 		boolean found=false;
 		Stall stallSelected = null;
@@ -512,7 +541,7 @@ public class Tastybites {
 	/**
 	 * @param StallList
 	 */
-	private static void AddStall(ArrayList<Stall> StallList) {
+	public static void AddStall(ArrayList<Stall> StallList) {
 		ViewAllStalls(StallList);
 		System.out.println("Tasty Bites!");
 		System.out.println("1. Add new Stall");
@@ -537,7 +566,7 @@ public class Tastybites {
 	 * @param name
 	 * @return
 	 */
-	private static boolean DeleteAccount(ArrayList<Account> AccountList, boolean loginprocess, String name) {
+	public static boolean DeleteAccount(ArrayList<Account> AccountList, boolean loginprocess, String name) {
 		Helper.line(80, "-");
 		char choice=Helper.readChar("Are you sure to delete Account?(Y/N) > ");
 		Helper.line(80, "-");
@@ -556,7 +585,7 @@ public class Tastybites {
 	/**
 	 * @param StallList
 	 */
-	private static void DeleteStall(ArrayList<Stall> StallList) {
+	public static void DeleteStall(ArrayList<Stall> StallList) {
 
 		int SelectStall=Helper.readInt("Stall number to Delete: ");
 
@@ -581,7 +610,7 @@ public class Tastybites {
 	/**
 	 * @param StallList
 	 */
-	private static void ViewAllStalls(ArrayList<Stall> StallList) {
+	public static void ViewAllStalls(ArrayList<Stall> StallList) {
 		Helper.line(80, "-");
 		System.out.println(String.format("%-20s%-20s", "STALL","STALL NUMBER"));
 		int i=1;
@@ -594,7 +623,7 @@ public class Tastybites {
 	/**
 	 * @param AccountList
 	 */
-	private static void ViewAllAccount(ArrayList<Account> AccountList) {
+	public static void ViewAllAccount(ArrayList<Account> AccountList) {
 		Helper.line(100, "-");
 		System.out.println(String.format("%-20s%s", "NAME", "ROLE"));
 		for (Account a : AccountList) {
@@ -606,7 +635,7 @@ public class Tastybites {
 	/**
 	 * @param AccountList
 	 */
-	private static void CreateAccount(ArrayList<Account> AccountList) {
+	public static void CreateAccount(ArrayList<Account> AccountList) {
 		String name =Helper.readString("Name: ");
 		String password=Helper.readString("Password: ");
 		String role=Helper.readString("Role (Staff/Customer): ");
@@ -635,7 +664,7 @@ public class Tastybites {
 		System.out.println("1. View all Accounts");
 		System.out.println("2. Edit Stalls");
 		System.out.println("3. Edit Menu");
-		System.out.println("4. Edit Queue");
+		System.out.println("4. Edit/View Queue");
 		System.out.println("5. View Feedback");
 		System.out.println("6. Delete my Account");
 		System.out.println("7. Logout");

@@ -22,13 +22,13 @@ public class TastyBiteTest {
 	private ArrayList<Queue> QueueList;
 	private ArrayList<MenuItem> Cart;
 	private ArrayList<Feedback> feedbackList;
-	
+
 	private ArrayList<MenuItem> menuList1;
 	private ArrayList<MenuItem> menuList2;
 	private ArrayList<MenuItem> menuList3;
 	private ArrayList<MenuItem> menuList4;
-	
-	
+
+
 	public TastyBiteTest() {
 		super();
 	}
@@ -44,7 +44,7 @@ public class TastyBiteTest {
 		s2 = new Stall("CoolMeat");
 		s3 = new Stall("IAte");
 		s4 = new Stall("PearList");
-		
+
 		ArrayList<Account> AccountList = new ArrayList<Account>();
 		ArrayList<Stall> StallList = new ArrayList<Stall>();
 		ArrayList<Queue> QueueList = new ArrayList<Queue>();
@@ -65,7 +65,7 @@ public class TastyBiteTest {
 		menuList2.add(new MenuItem("Noodles",5.50));
 		menuList2.add(new MenuItem("Roasted Duck",8.50));
 		menuList2.add(new MenuItem("Duck porriage",2.50));
-		
+
 		menuList3.add(new MenuItem("chicken rice",4.50));
 		menuList3.add(new MenuItem("maggie",5.50));
 		menuList3.add(new MenuItem("chicken cutlet",8.50));
@@ -86,112 +86,153 @@ public class TastyBiteTest {
 	}
 
 
-	
 
-	@Test
-	public void testAddChromebook() {
-	
-	}
+
 
 	@Test
 	public void testViewAllusers() {
+		//Test Case 1
+		// Test if Item list is not null and empty
 		
+		// Attempt to retrieve the Accounts from account list
+		
+		// Test if the output is empty
+		
+
+		//Test Case 2
+		
+		// Test that the list is not empty
+		
+		// Attempt to retrieve the Camcoders 
+	
+		// Test that the details are displayed correctly
+	
+
+		//Test Case 3
+		
+		// Attempt to retrieve the Camcoders 
+	
+		// Test that the details are displayed correctly
+	
 	}
 	@Test
 	public void testViewAllstalls() {
-		
+
 	}
 	@Test
 	public void testViewAllmenus() {
-		
+
 	}
 	@Test
 	public void testViewAllorders() {
-		
+
 	}
 	@Test
 	public void testViewAllqueue() {
-		
+
 	}
 	@Test
 	public void testViewAllfeedbacks() {
-		
+
 	}
 	@Test
 	public void testAdduser() {
-	
+		// Item list is not null and it is empty
+		assertNotNull("Test if there is valid Camcorder arraylist to add to", camcorderList);
+		assertEquals("Test that the Camcorder arraylist is empty.", 0, camcorderList.size());
+		//Given an empty list, after adding 1 item, the size of the list is 1
+		ResourceCentre.addCamcorder(camcorderList, cc1);		
+		assertEquals("Test that the Camcorder arraylist size is 1.", 1, camcorderList.size());
+
+
+		// Add an item
+		ResourceCentre.addCamcorder(camcorderList, cc2);
+		assertEquals("Test that the Camcorder arraylist size is now 2.", 2, camcorderList.size());
+		//The item just added is as same as the last item in the list
+		assertSame("Test that Camcorder is added to the end of the list.", cc2, camcorderList.get(1));
+
+		// Add an item that already exists in the list
+		ResourceCentre.addCamcorder(camcorderList, cc2);
+		assertEquals("Test that the Camcorder arraylist size is unchange.", 2, camcorderList.size());
+
+		// Add an item that has missing detail
+		Camcorder cc_missing = new Camcorder("CC0014", "", 60);
+		ResourceCentre.addCamcorder(camcorderList, cc_missing);
+		assertEquals("Test that the Camcorder arraylist size is unchange.", 2, camcorderList.size());
 	}
 	@Test
 	public void testAddstall() {
-	
+
 	}
 	@Test
 	public void testAddmenu() {
-	
+
 	}
 	@Test
 	public void testAddorder() {
-	
+
 	}
 	@Test
 	public void testAddqueue() {
-	
+
 	}
 	@Test
 	public void testAddfeedback() {
-	
+
 	}
 	@Test
 	public void testDeleteuser() {
-	
+		// Test if can delete from list
+		//Test if can delete when not in list
+		
 	}
 	@Test
 	public void testDeletestall() {
-	
+
 	}
 	@Test
 	public void testDeletemenu() {
-	
+
 	}
 	@Test
 	public void testDeleteorder() {
-	
+
 	}
 	@Test
 	public void testDeleteQueue() {
-	
+
 	}
 	@Test
 	public void testDeletefeedback() {
-	
+
 	}
 
 
 
-		
-	
-	}
 
-	@After
-	public void tearDown() throws Exception {
-		A1 = null;
-		A2 = null;
-		A3 = null;
-		A4 = null;
-		s1 = null;
-		s2 = null;
-		s3 = null;
-		s4 = null;
-		AccountList = null;
-		StallList = null;
-		QueueList = null;
-		Cart = null;
-		feedbackList = null;
-		menuList1 = null;
-		menuList2 = null;
-		menuList3 = null;
-		menuList4 = null;
-		
-	}
+
+}
+
+@After
+public void tearDown() throws Exception {
+	A1 = null;
+	A2 = null;
+	A3 = null;
+	A4 = null;
+	s1 = null;
+	s2 = null;
+	s3 = null;
+	s4 = null;
+	AccountList = null;
+	StallList = null;
+	QueueList = null;
+	Cart = null;
+	feedbackList = null;
+	menuList1 = null;
+	menuList2 = null;
+	menuList3 = null;
+	menuList4 = null;
+
+}
 
 }
