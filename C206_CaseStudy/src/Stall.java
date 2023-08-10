@@ -5,19 +5,16 @@ import java.util.Map;
 public class Stall {
 	private String name;
 	private ArrayList<MenuItem> menu;
-	private ArrayList<Feedback> Feedback;
-
+	
 	public Stall(String name,ArrayList<MenuItem> menu) {
 		this.name = name;
 		this.menu =menu;
-		this.Feedback=null;
+		
 	}
 	
 	
 	
-	public ArrayList<Feedback> getFeedback() {
-		return Feedback;
-	}
+	
 
 	public Stall(String name) {
 		this.name = name;
