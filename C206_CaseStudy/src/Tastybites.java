@@ -252,7 +252,7 @@ public class Tastybites {
 								while(foodoption!=5 && foodoption!=4) {
 									i=1;
 									Helper.line(80,"-");
-									System.out.println(String.format("%-5s %-20s $%-20s","No.", "ITEM","PRICE"));
+									System.out.println(String.format("%-5s %-20s %-20s","No.", "ITEM","PRICE"));
 									for(MenuItem b:Selected.getMenu()) {
 										System.out.println(String.format("%-5d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
 										i++;
@@ -269,28 +269,46 @@ public class Tastybites {
 									if(foodoption==1) {//add to cart
 
 										int Menuname =Helper.readInt("Menu Item to add to cart(Number) > ");
-
-										Cart.add(new MenuItem(Selected.getMenu().get(Menuname-1).getName(),Selected.getMenu().get(Menuname-1).getPrice()));
-										Helper.line(80,"-");
-										System.out.println(String.format(  "%-20s%-20s","ITEM","PRICE"));
-										for(MenuItem a:Cart) {
-											System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
+										if (!Cart.isEmpty()) {
+											for(MenuItem a:Cart) {
+												if(a.getName().equalsIgnoreCase(Selected.getMenu().get(Menuname-1).getName())) {
+													a.setQuantity(a.getQuantity()+1);
+													System.out.println(Cart.size());
+													break;
+												}else {
+													Cart.add(new MenuItem(Selected.getMenu().get(Menuname-1).getName(),Selected.getMenu().get(Menuname-1).getPrice(),1));
+													break;
+												}
+											}
+										}else {
+											Cart.add(new MenuItem(Selected.getMenu().get(Menuname-1).getName(),Selected.getMenu().get(Menuname-1).getPrice(),1));
 										}
+
+
 										Helper.line(80,"-");
+										ViewCart(Cart);
+										Helper.line(80,"-");
+
 										System.out.println("Item Added");
 									}else if (foodoption==2) {//remove from cart
 										if(Cart.size()==0) {
 											System.out.println("Cannot remove empty cart");
 										}else {
-											System.out.println(String.format(  "%-20s%-20s","ITEM","PRICE"));
-											for(MenuItem a:Cart) {
-												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
-											}
+											ViewCart(Cart);
 											int Menuname =Helper.readInt("Menu Item to remove from to cart(Number) > ");
 											for(MenuItem a:Cart) {
 												if(Cart.indexOf(a)==Menuname-1){
-													Cart.remove(Menuname-1);
-													break;
+													if(a.getQuantity()==1) {
+														Cart.remove(Menuname-1);
+														System.out.println("Removed");
+														break;
+													}
+													else { 
+														
+														a.setQuantity(a.getQuantity()-1);
+														break;
+													}
+													
 												}
 											}
 										}
@@ -299,11 +317,7 @@ public class Tastybites {
 										if(Cart.size()==0) {
 											System.out.println("Cannot View empty cart");
 										}else {
-											System.out.println(String.format(  "%-20s%-20s","ITEM","PRICE"));
-
-											for(MenuItem a:Cart) {
-												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
-											}
+											ViewCart(Cart);
 										}
 									}
 									else if (foodoption==4) {//Make payment
@@ -318,9 +332,10 @@ public class Tastybites {
 												}
 											}
 											double total=0;
-											System.out.println(String.format(  "%-20s%-20s","ITEM","PRICE"));
+											System.out.println(String.format(  "%-10s%-20s%-20s","No","ITEM","PRICE","QUANTITY"));
+											i=1;
 											for(MenuItem a:Cart) {
-												System.out.println(String.format(  "%-20s%-20.2f",a.getName(),a.getPrice()));
+												System.out.println(String.format(  "%-10%-20s%-20.2f%d",i,a.getName(),a.getPrice(),a.getQuantity()));
 												total+=a.getPrice();
 											}
 											System.out.println(String.format("Total: $%.2f",total));
@@ -450,6 +465,18 @@ public class Tastybites {
 	}
 
 	/**
+	 * @param Cart
+	 */
+	private static void ViewCart(ArrayList<MenuItem> Cart) {
+		System.out.println(String.format(  "%-10s%-20s%-20s%-20s","No","ITEM","PRICE","QUANTITY"));
+		int i=1;
+		for(MenuItem a:Cart) {
+			System.out.println(String.format(  "%-10d%-20s%-20.2f%d",i,a.getName(),a.getPrice(),a.getQuantity()));
+			i++;
+		}
+	}
+
+	/**
 	 * @param feedbackList
 	 * @param used
 	 */
@@ -485,7 +512,7 @@ public class Tastybites {
 		boolean found=false;
 		Stall stallSelected = null;
 		for(Stall a:StallList) {
-			if(StallList.indexOf(a)==stallNo) {
+			if(StallList.indexOf(a)==stallNo-1) {
 				found=true;
 				stallSelected=a;
 				break;
@@ -516,7 +543,7 @@ public class Tastybites {
 		boolean found=false;
 		Stall stallSelected = null;
 		for(Stall a:StallList) {
-			if(StallList.indexOf(a)==stallNo) {
+			if(StallList.indexOf(a)==stallNo-1) {
 				found=true;
 				stallSelected=a;
 				break;
@@ -526,8 +553,9 @@ public class Tastybites {
 			System.out.println("Stall Not Found");
 		}else {
 			int i=1;
+			System.out.println(String.format("%-10s %-20s $%-20s","No", "ITEM","PRICE"));
 			for(MenuItem b:stallSelected.getMenu()) {
-				System.out.println(String.format("%-20d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
+				System.out.println(String.format("%-10d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
 				i++;
 			}
 			String Menuname =Helper.readString("Menu item Name: ");

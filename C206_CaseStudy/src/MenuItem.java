@@ -10,14 +10,29 @@
 public class MenuItem {
 	private String name;
 	private double price;
+	private int quantity;
 
 	public MenuItem(String name, double price) {
 		this.name = name;
 		this.price = price;
+		this.quantity=0;
+	}
+	public MenuItem(String name, double price,int quan) {
+		this.name = name;
+		this.price = price;
+		this.quantity=quan;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public double getPrice() {
