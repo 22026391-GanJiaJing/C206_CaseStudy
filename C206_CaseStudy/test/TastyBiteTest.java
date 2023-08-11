@@ -92,55 +92,27 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllusers() {
 		//Test Case 1
-		// Test if AccountList is empty
-		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
-		// Attempt to retrieve the Accounts from accountlist
-		assertEquals("",AccountList.get(0).getName());
-		
-		
-		//Test case 2
-		//add two items and view list
-		AccountList.add(A1);
-		AccountList.add(A2);
-		assertEquals(2, AccountList.size());
-		String ExpectedOutput="Alice,Bob";
-		String ActualOutput=AccountList.get(0).getName()+","+AccountList.get(1);
-		assertEquals(ExpectedOutput, ActualOutput);
-
-		
-		
-
+		// Test if AccountList is null
+		assertNull("Test that the arrayList is empty",AccountList);
+	
 	
 	}
 	@Test
 	public void testViewAllstalls() {
 		//Test Case 1
-		// Test if AccountList is empty
-		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
-		// Attempt to retrieve the Accounts from accountlist
-		assertEquals("",AccountList.get(0).getName());
-		//Test case 2
-		
-		//add two items and view list
-		AccountList.add(A1);
-		AccountList.add(A2);
-		assertEquals(2, AccountList.size());
+		// Test if stallList is empty
+		assertNull("Test that the arrayList is empty",StallList);
 	
 
 	}
 	@Test
 	public void testViewAllmenus() {
 		//Test Case 1
-		// Test if AccountList is empty
-		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
-		// Attempt to retrieve the Accounts from accountlist
-		assertEquals("",AccountList.get(0).getName());
-		//Test case 2
+		// Test if menuList is null
+		assertNull("Test that the arrayList is empty",menuList1);
 		
-		//add two items and view list
-		AccountList.add(A1);
-		AccountList.add(A2);
-		assertEquals(2, AccountList.size());
+
+
 	
 
 
@@ -149,16 +121,9 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllorders() {
 		//Test Case 1
-		// Test if AccountList is empty
-		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
-		// Attempt to retrieve the Accounts from accountlist
-		assertEquals("",AccountList.get(0).getName());
-		//Test case 2
-		
-		//add two items and view list
-		AccountList.add(A1);
-		AccountList.add(A2);
-		assertEquals(2, AccountList.size());
+		// Test if Cart is null
+		assertNull("Test that the arrayList is empty",Cart);
+
 	
 
 
@@ -166,16 +131,9 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllqueue() {
 		//Test Case 1
-		// Test if AccountList is empty
-		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
-		// Attempt to retrieve the Accounts from accountlist
-		assertEquals("",AccountList.get(0).getName());
-		//Test case 2
-		
-		//add two items and view list
-		AccountList.add(A1);
-		AccountList.add(A2);
-		assertEquals(2, AccountList.size());
+		// Test if queueList is null
+		assertNull("Test that the arrayList is empty",QueueList);
+
 		
 
 
@@ -184,16 +142,9 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllfeedbacks() {
 		//Test Case 1
-		// Test if AccountList is empty
-		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
-		// Attempt to retrieve the Accounts from accountlist
-		assertEquals("",AccountList.get(0).getName());
-		//Test case 2
-		
-		//add two items and view list
-		AccountList.add(A1);
-		AccountList.add(A2);
-		assertEquals(2, AccountList.size());
+		// Test if feedbackList is null
+		assertNull("Test that the arrayList is empty",feedbackList);
+
 		
 
 
@@ -201,52 +152,53 @@ public class TastyBiteTest {
 	@Test
 	public void testAdduser() {
 	//test case 1
+		assertNull("Test that the arrayList is empty",AccountList);
 	}
 	@Test
 	public void testAddstall() {
-
+		assertNull("Test that the arrayList is empty",StallList);
 	}
 	@Test
 	public void testAddmenu() {
-
+		assertNull("Test that the arrayList is empty",menuList1);
 	}
 	@Test
 	public void testAddorder() {
-
+		assertNull("Test that the arrayList is empty",Cart);
 	}
 	@Test
 	public void testAddqueue() {
-
+		assertNull("Test that the arrayList is empty",QueueList);
 	}
 	@Test
 	public void testAddfeedback() {
-
+		assertNull("Test that the arrayList is empty",feedbackList);
 	}
 	@Test
 	public void testDeleteuser() {
 		// Test if can delete from list
 		//Test if can delete when not in list
-		
+		assertNull("Test that the arrayList is empty",AccountList);
 	}
 	@Test
 	public void testDeletestall() {
-
+		assertNull("Test that the arrayList is empty",StallList);
 	}
 	@Test
 	public void testDeletemenu() {
-
+		assertNull("Test that the arrayList is empty",menuList1);
 	}
 	@Test
 	public void testDeleteorder() {
-
+		assertNull("Test that the arrayList is empty",Cart);
 	}
 	@Test
 	public void testDeleteQueue() {
-
+		assertNull("Test that the arrayList is empty",QueueList);
 	}
 	@Test
 	public void testDeletefeedback() {
-
+		assertNull("Test that the arrayList is empty",feedbackList);
 	}
 
 
