@@ -92,10 +92,21 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllusers() {
 		//Test Case 1
-		// Test if AccountList is not null and empty
-		
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
 		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
 		
+		
+		//Test case 2
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
+		String ExpectedOutput="Alice,Bob";
+		String ActualOutput=AccountList.get(0).getName()+","+AccountList.get(1);
+		assertEquals(ExpectedOutput, ActualOutput);
+
 		
 		
 
@@ -104,67 +115,92 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllstalls() {
 		//Test Case 1
-				// Test if AccountList is not null and empty
-				
-				// Attempt to retrieve the Accounts from accountlist
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
+	
 
 	}
 	@Test
 	public void testViewAllmenus() {
 		//Test Case 1
-				// Test if AccountList is not null and empty
-				
-				// Attempt to retrieve the Accounts from accountlist
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
+	
+
+
 
 	}
 	@Test
 	public void testViewAllorders() {
 		//Test Case 1
-				// Test if AccountList is not null and empty
-				
-				// Attempt to retrieve the Accounts from accountlist
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
+	
+
 
 	}
 	@Test
 	public void testViewAllqueue() {
 		//Test Case 1
-				// Test if AccountList is not null and empty
-				
-				// Attempt to retrieve the Accounts from accountlist
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
+		
+
+
 
 	}
 	@Test
 	public void testViewAllfeedbacks() {
 		//Test Case 1
-				// Test if AccountList is not null and empty
-				
-				// Attempt to retrieve the Accounts from accountlist
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
+		
+
 
 	}
 	@Test
 	public void testAdduser() {
-		// Item list is not null and it is empty
-		assertNotNull("Test if there is valid Camcorder arraylist to add to", camcorderList);
-		assertEquals("Test that the Camcorder arraylist is empty.", 0, camcorderList.size());
-		//Given an empty list, after adding 1 item, the size of the list is 1
-		ResourceCentre.addCamcorder(camcorderList, cc1);		
-		assertEquals("Test that the Camcorder arraylist size is 1.", 1, camcorderList.size());
-
-
-		// Add an item
-		ResourceCentre.addCamcorder(camcorderList, cc2);
-		assertEquals("Test that the Camcorder arraylist size is now 2.", 2, camcorderList.size());
-		//The item just added is as same as the last item in the list
-		assertSame("Test that Camcorder is added to the end of the list.", cc2, camcorderList.get(1));
-
-		// Add an item that already exists in the list
-		ResourceCentre.addCamcorder(camcorderList, cc2);
-		assertEquals("Test that the Camcorder arraylist size is unchange.", 2, camcorderList.size());
-
-		// Add an item that has missing detail
-		Camcorder cc_missing = new Camcorder("CC0014", "", 60);
-		ResourceCentre.addCamcorder(camcorderList, cc_missing);
-		assertEquals("Test that the Camcorder arraylist size is unchange.", 2, camcorderList.size());
+	//test case 1
 	}
 	@Test
 	public void testAddstall() {
@@ -217,7 +253,7 @@ public class TastyBiteTest {
 
 
 
-}
+
 
 @After
 public void tearDown() throws Exception {
