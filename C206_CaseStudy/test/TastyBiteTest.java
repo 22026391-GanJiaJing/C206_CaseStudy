@@ -92,47 +92,53 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllusers() {
 		//Test Case 1
-		// Test if Item list is not null and empty
+		// Test if AccountList is not null and empty
 		
-		// Attempt to retrieve the Accounts from account list
+		// Attempt to retrieve the Accounts from accountlist
 		
-		// Test if the output is empty
+		
 		
 
-		//Test Case 2
-		
-		// Test that the list is not empty
-		
-		// Attempt to retrieve the Camcoders 
-	
-		// Test that the details are displayed correctly
-	
-
-		//Test Case 3
-		
-		// Attempt to retrieve the Camcoders 
-	
-		// Test that the details are displayed correctly
 	
 	}
 	@Test
 	public void testViewAllstalls() {
+		//Test Case 1
+				// Test if AccountList is not null and empty
+				
+				// Attempt to retrieve the Accounts from accountlist
 
 	}
 	@Test
 	public void testViewAllmenus() {
+		//Test Case 1
+				// Test if AccountList is not null and empty
+				
+				// Attempt to retrieve the Accounts from accountlist
 
 	}
 	@Test
 	public void testViewAllorders() {
+		//Test Case 1
+				// Test if AccountList is not null and empty
+				
+				// Attempt to retrieve the Accounts from accountlist
 
 	}
 	@Test
 	public void testViewAllqueue() {
+		//Test Case 1
+				// Test if AccountList is not null and empty
+				
+				// Attempt to retrieve the Accounts from accountlist
 
 	}
 	@Test
 	public void testViewAllfeedbacks() {
+		//Test Case 1
+				// Test if AccountList is not null and empty
+				
+				// Attempt to retrieve the Accounts from accountlist
 
 	}
 	@Test
