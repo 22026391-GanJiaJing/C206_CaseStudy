@@ -92,27 +92,55 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllusers() {
 		//Test Case 1
-		// Test if AccountList is null
-		assertNull("Test that the arrayList is empty",AccountList);
-	
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		
+		
+		//Test case 2
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
+		String ExpectedOutput="Alice,Bob";
+		String ActualOutput=AccountList.get(0).getName()+","+AccountList.get(1);
+		assertEquals(ExpectedOutput, ActualOutput);
+
+		
+		
+
 	
 	}
 	@Test
 	public void testViewAllstalls() {
 		//Test Case 1
-		// Test if stallList is empty
-		assertNull("Test that the arrayList is empty",StallList);
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
 	
 
 	}
 	@Test
 	public void testViewAllmenus() {
 		//Test Case 1
-		// Test if menuList is null
-		assertNull("Test that the arrayList is empty",menuList1);
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
 		
-
-
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
 	
 
 
@@ -121,9 +149,16 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllorders() {
 		//Test Case 1
-		// Test if Cart is null
-		assertNull("Test that the arrayList is empty",Cart);
-
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
 	
 
 
@@ -131,9 +166,16 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllqueue() {
 		//Test Case 1
-		// Test if queueList is null
-		assertNull("Test that the arrayList is empty",QueueList);
-
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
 		
 
 
@@ -142,9 +184,16 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllfeedbacks() {
 		//Test Case 1
-		// Test if feedbackList is null
-		assertNull("Test that the arrayList is empty",feedbackList);
-
+		// Test if AccountList is empty
+		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
+		// Attempt to retrieve the Accounts from accountlist
+		assertEquals("",AccountList.get(0).getName());
+		//Test case 2
+		
+		//add two items and view list
+		AccountList.add(A1);
+		AccountList.add(A2);
+		assertEquals(2, AccountList.size());
 		
 
 
@@ -152,54 +201,180 @@ public class TastyBiteTest {
 	@Test
 	public void testAdduser() {
 	//test case 1
-		assertNull("Test that the arrayList is empty",AccountList);
+	    AccountList.add(A1);
+	    assertEquals(1, AccountList.size());
+
+	 // Test case 2: Adding multiple users and verifying the count
+	    AccountList.add(A2);
+	    AccountList.add(A3);
+	    assertEquals(3, AccountList.size());
 	}
+
 	@Test
 	public void testAddstall() {
-		assertNull("Test that the arrayList is empty",StallList);
+		// Test case 1: Adding a stall to the StallList
+	    StallList.add(s1);
+	    assertEquals(1, StallList.size());
+
+	    // Test case 2: Adding multiple stalls and verifying the count
+	    StallList.add(s2);
+	    StallList.add(s3);
+	    assertEquals(3, StallList.size());
 	}
+	
 	@Test
 	public void testAddmenu() {
-		assertNull("Test that the arrayList is empty",menuList1);
+	    // Test case 1: Adding a menu item to a stall's menu
+	    MenuItem newItem = new MenuItem("New Item", 10.0);
+	    Stall targetStall = StallList.get(0); // Assuming you have stalls in the list
+	    targetStall.getMenu().add(newItem);
+	    assertEquals(1, targetStall.getMenu().size());
+
+	    // Test case 2: Adding multiple menu items and verifying the count
+	    ArrayList<MenuItem> newMenuItems = new ArrayList<>();
+	    newMenuItems.add(new MenuItem("Item 1", 8.0));
+	    newMenuItems.add(new MenuItem("Item 2", 12.0));
+	    targetStall.getMenu().addAll(newMenuItems);
+	    assertEquals(3, targetStall.getMenu().size());
 	}
 	@Test
 	public void testAddorder() {
-		assertNull("Test that the arrayList is empty",Cart);
+		// Test case 1: Adding an order to the OrderList
+	    Order newOrder = new Order();
+	    OrderList.add(newOrder);
+	    assertEquals(1, OrderList.size());
+
+	    // Test case 2: Adding multiple orders and verifying the count
+	    OrderList.add(new Order());
+	    OrderList.add(new Order());
+	    assertEquals(3, OrderList.size());
 	}
+	
 	@Test
 	public void testAddqueue() {
-		assertNull("Test that the arrayList is empty",QueueList);
+	    // Test case 1: Adding a queue to the QueueList
+	    Queue newQueue = new Queue();
+	    QueueList.add(newQueue);
+	    assertEquals(1, QueueList.size());
+
+	    // Test case 2: Adding multiple queues and verifying the count
+	    QueueList.add(new Queue());
+	    QueueList.add(new Queue());
+	    assertEquals(3, QueueList.size());
 	}
+
 	@Test
 	public void testAddfeedback() {
-		assertNull("Test that the arrayList is empty",feedbackList);
+	    // Test case 1: Adding feedback to the feedbackList
+	    Feedback newFeedback = new Feedback();
+	    feedbackList.add(newFeedback);
+	    assertEquals(1, feedbackList.size());
+
+	    // Test case 2: Adding multiple feedbacks and verifying the count
+	    feedbackList.add(new Feedback());
+	    feedbackList.add(new Feedback());
+	    assertEquals(3, feedbackList.size());
 	}
+
 	@Test
 	public void testDeleteuser() {
 		// Test if can delete from list
 		//Test if can delete when not in list
-		assertNull("Test that the arrayList is empty",AccountList);
+	    AccountList.add(A1);
+	    int initialSize = AccountList.size();
+
+	    boolean removed = AccountList.remove(A1);
+	    assertTrue(removed);
+	    assertEquals(initialSize - 1, AccountList.size());
+
+	    // Test if can delete when not in list
+	    int newSize = AccountList.size();
+	    boolean notRemoved = AccountList.remove(A1);
+	    assertFalse(notRemoved);
+	    assertEquals(newSize, AccountList.size());
 	}
+
 	@Test
 	public void testDeletestall() {
-		assertNull("Test that the arrayList is empty",StallList);
-	}
+		 StallList.add(s1);
+		    int initialSize = StallList.size();
+
+		    boolean removed = StallList.remove(s1);
+		    assertTrue(removed);
+		    assertEquals(initialSize - 1, StallList.size());
+
+		    // Test if can delete when not in list
+		    int newSize = StallList.size();
+		    boolean notRemoved = StallList.remove(s1);
+		    assertFalse(notRemoved);
+		    assertEquals(newSize, StallList.size());
+		}
 	@Test
 	public void testDeletemenu() {
-		assertNull("Test that the arrayList is empty",menuList1);
+		ArrayList<MenuItem> menuList = new ArrayList<MenuItem>();
+	    menuList.add(new MenuItem("Item1", 5.0));
+	    Stall stall = new Stall("StallWithMenu", menuList);
+	    StallList.add(stall);
+	    
+	    int initialSize = stall.getMenu().size();
+	    
+	    boolean removed = stall.getMenu().remove(menuList.get(0));
+	    assertTrue(removed);
+	    assertEquals(initialSize - 1, stall.getMenu().size());
+
+	    // Test if can delete when not in list
+	    int newSize = stall.getMenu().size();
+	    boolean notRemoved = stall.getMenu().remove(menuList.get(0));
+	    assertFalse(notRemoved);
+	    assertEquals(newSize, stall.getMenu().size());
 	}
+	
 	@Test
 	public void testDeleteorder() {
-		assertNull("Test that the arrayList is empty",Cart);
+	    Order order1 = new Order();
+	    OrderList.add(order1);
+	    int initialSize = OrderList.size();
+
+	    boolean removed = OrderList.remove(order1);
+	    assertTrue(removed);
+	    assertEquals(initialSize - 1, OrderList.size());
+
+	    int newSize = OrderList.size();
+	    boolean notRemoved = OrderList.remove(order1);
+	    assertFalse(notRemoved);
+	    assertEquals(newSize, OrderList.size());
 	}
 	@Test
 	public void testDeleteQueue() {
-		assertNull("Test that the arrayList is empty",QueueList);
-	}
+		 Queue queue1 = new Queue();
+		    QueueList.add(queue1);
+		    int initialSize = QueueList.size();
+
+		    boolean removed = QueueList.remove(queue1);
+		    assertTrue(removed);
+		    assertEquals(initialSize - 1, QueueList.size());
+
+		    int newSize = QueueList.size();
+		    boolean notRemoved = QueueList.remove(queue1);
+		    assertFalse(notRemoved);
+		    assertEquals(newSize, QueueList.size());
+		}
+
 	@Test
 	public void testDeletefeedback() {
-		assertNull("Test that the arrayList is empty",feedbackList);
-	}
+		 Feedback feedback1 = new Feedback();
+		    feedbackList.add(feedback1);
+		    int initialSize = feedbackList.size();
+
+		    boolean removed = feedbackList.remove(feedback1);
+		    assertTrue(removed);
+		    assertEquals(initialSize - 1, feedbackList.size());
+
+		    int newSize = feedbackList.size();
+		    boolean notRemoved = feedbackList.remove(feedback1);
+		    assertFalse(notRemoved);
+		    assertEquals(newSize, feedbackList.size());
+		}
 
 
 
