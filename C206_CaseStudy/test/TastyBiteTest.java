@@ -332,22 +332,23 @@ public class TastyBiteTest {
 	
 	@Test
 	public void testDeleteorder() {
-	    Order order1 = new Order();
-	    OrderList.add(order1);
-	    int initialSize = OrderList.size();
+	    ArrayList<MenuItem> MenuItems = new ArrayList<>();
+	    MenuItems.add(new MenuItem("Item 1", 8.0));
+	    Cart.add(MenuItems.get(0));
+	    int initialSize = Cart.size();
 
-	    boolean removed = OrderList.remove(order1);
+	    boolean removed = Cart.remove(MenuItems.get(0));
 	    assertTrue(removed);
-	    assertEquals(initialSize - 1, OrderList.size());
+	    assertEquals(initialSize - 1, Cart.size());
 
-	    int newSize = OrderList.size();
-	    boolean notRemoved = OrderList.remove(order1);
+	    int newSize = Cart.size();
+	    boolean notRemoved = Cart.remove(MenuItems.get(0));
 	    assertFalse(notRemoved);
-	    assertEquals(newSize, OrderList.size());
+	    assertEquals(newSize, Cart.size());
 	}
 	@Test
 	public void testDeleteQueue() {
-		 Queue queue1 = new Queue();
+		 Queue queue1 = new Queue(A1, Cart);
 		    QueueList.add(queue1);
 		    int initialSize = QueueList.size();
 
@@ -363,7 +364,7 @@ public class TastyBiteTest {
 
 	@Test
 	public void testDeletefeedback() {
-		 Feedback feedback1 = new Feedback();
+		 Feedback feedback1 = new Feedback(A1, "Nice", 8, s1);
 		    feedbackList.add(feedback1);
 		    int initialSize = feedbackList.size();
 
