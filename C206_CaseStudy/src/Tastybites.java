@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 public class Tastybites {
 
+	private static final int LINE_LENGTH_80 = 80;
+	private static final int LINE_LENGTH_100 = 100;
+	private static final String LINE = "-";
 	public static void main(String[] args) {
 
 		ArrayList<Account> AccountList = new ArrayList<Account>();
@@ -48,13 +51,13 @@ public class Tastybites {
 
 				if (option == 1) {
 					// Create new Account
-					Helper.line(80,"-");
+					Helper.line(80,LINE);
 					CreateAccount(AccountList);
 
 
 				} else if (option == 2) {
 					// Login
-					Helper.line(80,"-");
+					Helper.line(80,LINE);
 					name =Helper.readString("Username: ");
 					password=Helper.readString("Password: ");
 
@@ -69,7 +72,7 @@ public class Tastybites {
 						System.out.println("Wrong Username or Password");
 					}
 				} else if (option == 3  ) {
-					Helper.line(80,"-");
+					Helper.line(80,LINE);
 					System.out.println("Closing System");
 					System.exit(0);
 				} else {
@@ -201,7 +204,7 @@ public class Tastybites {
 					}
 
 					else if (option == 8 ) {
-						Helper.line(80,"-");
+						Helper.line(80,LINE);
 						System.out.println("Closing System");
 						System.exit(0);
 					} else {
@@ -251,21 +254,21 @@ public class Tastybites {
 
 								while(foodoption!=5 && foodoption!=4) {
 									i=1;
-									Helper.line(80,"-");
+									Helper.line(80,LINE);
 									System.out.println(String.format("%-5s %-20s %-20s","No.", "ITEM","PRICE"));
 									for(MenuItem b:Selected.getMenu()) {
 										System.out.println(String.format("%-5d %-20s $%-20.2f",i, b.getName(),b.getPrice()));
 										i++;
 									}
-									Helper.line(80,"-");
+									Helper.line(80,LINE);
 									System.out.println("1. Add to Cart");
 									System.out.println("2. Remove from Cart");
 									System.out.println("3. View Cart");
 									System.out.println("4. Make Payment");
 									System.out.println("5. Back");
-									Helper.line(80, "-");
+									Helper.line(80, LINE);
 									foodoption=Helper.readInt("Enter an option > ");
-									Helper.line(80,"-");
+									Helper.line(80,LINE);
 									if(foodoption==1) {//add to cart
 
 										int Menuname =Helper.readInt("Menu Item to add to cart(Number) > ");
@@ -285,9 +288,9 @@ public class Tastybites {
 										}
 
 
-										Helper.line(80,"-");
+										Helper.line(80,LINE);
 										ViewCart(Cart);
-										Helper.line(80,"-");
+										Helper.line(80,LINE);
 
 										System.out.println("Item Added");
 									}else if (foodoption==2) {//remove from cart
@@ -451,7 +454,7 @@ public class Tastybites {
 					}
 
 					else if (option == 5) {
-						Helper.line(80,"-");
+						Helper.line(80,LINE);
 						System.out.println("Closing System");
 						System.exit(0);
 					} else {
@@ -481,7 +484,7 @@ public class Tastybites {
 	 * @param used
 	 */
 	public static void ViewMyFeedbacks(ArrayList<Feedback> feedbackList, Account used) {
-		Helper.line(80,"-");
+		Helper.line(80,LINE);
 		int i=1;
 		System.out.println(String.format("%-5s%-5s%-30s%-10s","No","USER","FEEDBACK","RATING" ));
 		for(Feedback a:feedbackList) {
@@ -489,19 +492,19 @@ public class Tastybites {
 				System.out.println(String.format("%-5d%-5s%-30s%-10d",i,a.getAcc().getName(),a.getFeedback(),a.getRating() ));
 			}
 		}
-		Helper.line(80,"-");
+		Helper.line(80,LINE);
 	}
 
 	/**
 	 * 
 	 */
 	public static void FeedbackOptions() {
-		Helper.line(80,"-");
+		Helper.line(80,LINE);
 		System.out.println("1. Add Feedback");
 		System.out.println("2. Delete Feedback");
 		System.out.println("3. View All My Feedbacks");
 		System.out.println("4. Back");
-		Helper.line(80,"-");
+		Helper.line(80,LINE);
 	}
 
 	/**
@@ -595,9 +598,9 @@ public class Tastybites {
 	 * @return
 	 */
 	public static boolean DeleteAccount(ArrayList<Account> AccountList, boolean loginprocess, String name) {
-		Helper.line(80, "-");
+		Helper.line(LINE_LENGTH_80, LINE);
 		char choice=Helper.readChar("Are you sure to delete Account?(Y/N) > ");
-		Helper.line(80, "-");
+		Helper.line(LINE_LENGTH_80, LINE);
 		if(choice=='Y') {
 
 
@@ -639,25 +642,25 @@ public class Tastybites {
 	 * @param StallList
 	 */
 	public static void ViewAllStalls(ArrayList<Stall> StallList) {
-		Helper.line(80, "-");
+		Helper.line(80, LINE);
 		System.out.println(String.format("%-20s%-20s", "STALL","STALL NUMBER"));
 		int i=1;
 		for (Stall a : StallList) {
 			System.out.println(String.format("%-20s%-20d", a.getName(),i++));
 		}
-		Helper.line(80, "-");
+		Helper.line(80, LINE);
 	}
 
 	/**
 	 * @param AccountList
 	 */
 	public static void ViewAllAccount(ArrayList<Account> AccountList) {
-		Helper.line(100, "-");
+		Helper.line(LINE_LENGTH_100, LINE);
 		System.out.println(String.format("%-20s%s", "NAME", "ROLE"));
 		for (Account a : AccountList) {
 			System.out.println(String.format("%-20s%s", a.getName(), a.getRole()));
 		}
-		Helper.line(100, "-");
+		Helper.line(LINE_LENGTH_100, LINE);
 	}
 
 	/**
@@ -668,7 +671,8 @@ public class Tastybites {
 		String password=Helper.readString("Password: ");
 		String role=Helper.readString("Role (Staff/Customer): ");
 		role.toLowerCase();
-		AccountList.add(new Account(name,password,role));
+		Account accountAdd = new Account(name,password,role);
+		AccountList.add(accountAdd);
 		System.out.println("Account Created");
 	}
 
@@ -682,7 +686,7 @@ public class Tastybites {
 		System.out.println("1. Create New Account");
 		System.out.println("2. Login");
 		System.out.println("3. Quit");
-		Helper.line(80, "-");
+		Helper.line(80, LINE);
 
 	}
 	public static void Staffmenu() {
@@ -697,7 +701,7 @@ public class Tastybites {
 		System.out.println("6. Delete my Account");
 		System.out.println("7. Logout");
 		System.out.println("8. Quit");
-		Helper.line(80, "-");
+		Helper.line(80, LINE);
 
 	}
 	public static void Customermenu() {
@@ -709,7 +713,7 @@ public class Tastybites {
 		System.out.println("3. Logout");
 		System.out.println("4. Edit Feedback");
 		System.out.println("5. Quit");
-		Helper.line(80, "-");
+		Helper.line(80, LINE);
 
 	}
 
