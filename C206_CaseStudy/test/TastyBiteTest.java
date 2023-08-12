@@ -240,39 +240,40 @@ public class TastyBiteTest {
 	@Test
 	public void testAddorder() {
 		// Test case 1: Adding an order to the OrderList
-	    Order newOrder = new Order();
-	    OrderList.add(newOrder);
-	    assertEquals(1, OrderList.size());
+	    ArrayList<MenuItem> MenuItems = new ArrayList<>();
+	    MenuItems.add(new MenuItem("Item 1", 8.0));
+	    Cart.add(MenuItems.get(0));
+	    assertEquals(1, Cart.size());
 
 	    // Test case 2: Adding multiple orders and verifying the count
-	    OrderList.add(new Order());
-	    OrderList.add(new Order());
-	    assertEquals(3, OrderList.size());
+	    Cart.add(MenuItems.get(0));
+	    Cart.add(MenuItems.get(0));
+	    assertEquals(3, Cart.size());
 	}
 	
 	@Test
 	public void testAddqueue() {
 	    // Test case 1: Adding a queue to the QueueList
-	    Queue newQueue = new Queue();
+	    Queue newQueue = new Queue(A1, Cart);
 	    QueueList.add(newQueue);
 	    assertEquals(1, QueueList.size());
 
 	    // Test case 2: Adding multiple queues and verifying the count
-	    QueueList.add(new Queue());
-	    QueueList.add(new Queue());
+	    QueueList.add(new Queue(A2, Cart));
+	    QueueList.add(new Queue(A3, Cart));
 	    assertEquals(3, QueueList.size());
 	}
 
 	@Test
 	public void testAddfeedback() {
 	    // Test case 1: Adding feedback to the feedbackList
-	    Feedback newFeedback = new Feedback();
+	    Feedback newFeedback = new Feedback(A1, "Nice", 8, s1);
 	    feedbackList.add(newFeedback);
 	    assertEquals(1, feedbackList.size());
 
 	    // Test case 2: Adding multiple feedbacks and verifying the count
-	    feedbackList.add(new Feedback());
-	    feedbackList.add(new Feedback());
+	    feedbackList.add(new Feedback(A2, "Nice", 8, s1));
+	    feedbackList.add(new Feedback(A3, "Nice", 8, s1));
 	    assertEquals(3, feedbackList.size());
 	}
 
