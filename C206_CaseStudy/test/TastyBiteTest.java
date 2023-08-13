@@ -92,19 +92,21 @@ public class TastyBiteTest {
 	@Test
 	public void testViewAllusers() {
 		//Test Case 1
+		ArrayList<Account> AccountList = new ArrayList<Account>();
 		// Test if AccountList is empty
 		assertEquals("Test that the Account arrayList is empty",0,AccountList.size());
 		// Attempt to retrieve the Accounts from accountlist
-		assertEquals("",AccountList.get(0).getName());
+		AccountList.add(A3);
+		assertEquals("Chloe",AccountList.get(0).getName());
 		
 		
 		//Test case 2
 		//add two items and view list
 		AccountList.add(A1);
 		AccountList.add(A2);
-		assertEquals(2, AccountList.size());
+		assertEquals(3, AccountList.size());
 		String ExpectedOutput="Alice,Bob";
-		String ActualOutput=AccountList.get(0).getName()+","+AccountList.get(1);
+		String ActualOutput=AccountList.get(1).getName()+","+AccountList.get(2).getName();
 		assertEquals(ExpectedOutput, ActualOutput);
 
 		
