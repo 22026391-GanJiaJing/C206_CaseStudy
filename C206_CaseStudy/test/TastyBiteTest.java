@@ -202,6 +202,7 @@ public class TastyBiteTest {
 	}
 	@Test
 	public void testAdduser() {
+		ArrayList<Account> AccountList = new ArrayList<Account>();
 	//test case 1
 	    AccountList.add(A1);
 	    assertEquals(1, AccountList.size());
