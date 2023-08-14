@@ -295,6 +295,7 @@ public class TastyBiteTest {
 	    assertEquals(initialSize - 1, AccountList.size());
 
 	    // Test if can delete when not in list
+	    
 	    int newSize = AccountList.size();
 	    boolean notRemoved = AccountList.remove(A1);
 	    assertFalse(notRemoved);
