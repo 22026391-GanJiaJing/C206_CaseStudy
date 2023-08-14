@@ -217,6 +217,7 @@ public class TastyBiteTest {
 	public void testAddstall() {
 		// Test case 1: Adding a stall to the StallList
 	    StallList.add(s1);
+	    
 	    assertEquals(1, StallList.size());
 
 	    // Test case 2: Adding multiple stalls and verifying the count
@@ -282,6 +283,7 @@ public class TastyBiteTest {
 
 	@Test
 	public void testDeleteuser() {
+		ArrayList<Account> AccountList = new ArrayList<Account>();
 		// Test if can delete from list
 		//Test if can delete when not in list
 	    AccountList.add(A1);
