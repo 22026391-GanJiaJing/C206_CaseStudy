@@ -449,7 +449,8 @@ public class Tastybites {
 			while(rating>5 ||rating<1) {
 				rating=Helper.readInt("Re-Enter Your Rating(1-5) > ");
 			}
-			addfeedbacks(feedbackList, used, Selected, feedback, rating);
+			Feedback newFeedback=new Feedback(used,feedback,rating,Selected);
+			AddnewFeedback(feedbackList, newFeedback);
 			System.out.println("Feedback Added");
 
 		}
@@ -457,14 +458,10 @@ public class Tastybites {
 
 	/**
 	 * @param feedbackList
-	 * @param used
-	 * @param Selected
-	 * @param feedback
-	 * @param rating
+	 * @param newFeedback
 	 */
-	private static void addfeedbacks(ArrayList<Feedback> feedbackList, Account used, Stall Selected, String feedback,
-			int rating) {
-		feedbackList.add(new Feedback(used,feedback,rating,Selected));
+	public static void AddnewFeedback(ArrayList<Feedback> feedbackList, Feedback newFeedback) {
+		feedbackList.add(newFeedback);
 	}
 
 	/**
@@ -478,7 +475,7 @@ public class Tastybites {
 
 		for(Feedback a:feedbackList) {
 			if(a.getAcc()==used) {
-				myFeedback.add(a);
+				AddnewFeedback(myFeedback, a);
 			}
 		}
 		if(myFeedback.isEmpty()) {
