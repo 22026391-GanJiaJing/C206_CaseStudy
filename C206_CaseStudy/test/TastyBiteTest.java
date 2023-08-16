@@ -299,13 +299,14 @@ public class TastyBiteTest {
 	public void testAddfeedback() {
 		ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 	    // Test case 1: Adding feedback to the feedbackList
-	    Feedback newFeedback = new Feedback(A1, "Nice", 8, s1);
+		assertEquals(0, feedbackList.size());
+	    Feedback newFeedback = new Feedback(A1, "Nice", 4, s1);
 	    feedbackList.add(newFeedback);
 	    assertEquals(1, feedbackList.size());
 
 	    // Test case 2: Adding multiple feedbacks and verifying the count
-	    feedbackList.add(new Feedback(A2, "Nice", 8, s1));
-	    feedbackList.add(new Feedback(A3, "Nice", 8, s1));
+	    feedbackList.add(new Feedback(A2, "Nice", 4, s1));
+	    feedbackList.add(new Feedback(A3, "Nice", 4, s1));
 	    assertEquals(3, feedbackList.size());
 	}
 
