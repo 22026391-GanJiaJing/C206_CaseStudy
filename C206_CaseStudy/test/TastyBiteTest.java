@@ -310,7 +310,8 @@ public class TastyBiteTest {
 		Tastybites.AddnewFeedback(feedbackList, new Feedback(A3, "Nice", 4, s1));
 		assertEquals(3, feedbackList.size());
 		
-		// Test
+		// Test case 3: check if the first feedback added is the same.
+		assertEquals(newFeedback,feedbackList.get(0));
 
 	}
 
