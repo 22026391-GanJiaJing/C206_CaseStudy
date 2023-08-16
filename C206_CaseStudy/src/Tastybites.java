@@ -449,10 +449,22 @@ public class Tastybites {
 			while(rating>5 ||rating<1) {
 				rating=Helper.readInt("Re-Enter Your Rating(1-5) > ");
 			}
-			feedbackList.add(new Feedback(used,feedback,rating,Selected));
+			addfeedbacks(feedbackList, used, Selected, feedback, rating);
 			System.out.println("Feedback Added");
 
 		}
+	}
+
+	/**
+	 * @param feedbackList
+	 * @param used
+	 * @param Selected
+	 * @param feedback
+	 * @param rating
+	 */
+	private static void addfeedbacks(ArrayList<Feedback> feedbackList, Account used, Stall Selected, String feedback,
+			int rating) {
+		feedbackList.add(new Feedback(used,feedback,rating,Selected));
 	}
 
 	/**
