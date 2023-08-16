@@ -491,7 +491,7 @@ public class Tastybites {
 	 * @param myFeedback
 	 * @param stalloption
 	 */
-	private static void deleteExistFeedback(ArrayList<Feedback> feedbackList, ArrayList<Feedback> myFeedback,
+	public static void deleteExistFeedback(ArrayList<Feedback> feedbackList, ArrayList<Feedback> myFeedback,
 			int stalloption) {
 		for(Feedback a:myFeedback) {
 			if(stalloption-1==myFeedback.indexOf(a)) {
