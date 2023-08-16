@@ -421,8 +421,10 @@ public class TastyBiteTest {
 	@Test
 	public void testDeletefeedback() {
 		ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
-		Feedback feedback1 = new Feedback(A1, "Nice", 8, s1);
-		feedbackList.add(feedback1);
+		Feedback feedback1 = new Feedback(A1, "Nice", 5, s1);
+		Tastybites.AddnewFeedback(feedbackList, feedback1);
+		assertEquals(1, feedbackList.size());
+		
 		int initialSize = feedbackList.size();
 
 		boolean removed = feedbackList.remove(feedback1);

@@ -482,24 +482,14 @@ public class Tastybites {
 			System.out.println("No Feedback Found from you");
 		}else {
 			int stalloption = Helper.readInt("Enter Feedback To Delete > ");
-			deleteExistFeedback(feedbackList, myFeedback, stalloption);
-		}
-	}
-
-	/**
-	 * @param feedbackList
-	 * @param myFeedback
-	 * @param stalloption
-	 */
-	public static void deleteExistFeedback(ArrayList<Feedback> feedbackList, ArrayList<Feedback> myFeedback,
-			int stalloption) {
-		for(Feedback a:myFeedback) {
-			if(stalloption-1==myFeedback.indexOf(a)) {
-				myFeedback.remove(a);
-				feedbackList.remove(a);
-				System.out.println("Feedback Deleted");
+			for(Feedback a:myFeedback) {
+				if(stalloption-1==myFeedback.indexOf(a)) {
+					myFeedback.remove(a);
+					feedbackList.remove(a);
+					System.out.println("Feedback Deleted");
+				}
+				break;
 			}
-			break;
 		}
 	}
 
