@@ -208,15 +208,17 @@ public class TastyBiteTest {
 
 		// Adding feedback to the feedbackList
 		Feedback feedback1 = new Feedback(A1, "Nice food!", 4, s1);
-		feedbackList.add(feedback1);
+		Tastybites.AddnewFeedback(feedbackList, feedback1);
 		assertEquals(1, feedbackList.size());
 
 		// Test Case 2: Adding multiple feedbacks and checking the size and content
 		Feedback feedback2 = new Feedback(A2, "Great service!", 5, s2);
-		feedbackList.add(feedback2);
+		Tastybites.AddnewFeedback(feedbackList, feedback2);
+	
 
 		Feedback feedback3 = new Feedback(A3, "Average experience.", 3, s1);
-		feedbackList.add(feedback3);
+		Tastybites.AddnewFeedback(feedbackList, feedback3);
+	
 
 		assertEquals(3, feedbackList.size());
 	}
