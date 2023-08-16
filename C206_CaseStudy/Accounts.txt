@@ -1,4 +1,0 @@
-James,JamesTheMan123,Staff
-Bob,123Bob,Staff
-Mary,MaryCustomer,Customer
-
