@@ -308,7 +308,7 @@ public class TastyBiteTest {
 	    feedbackList.add(new Feedback(A2, "Nice", 4, s1));
 	    feedbackList.add(new Feedback(A3, "Nice", 4, s1));
 	    assertEquals(3, feedbackList.size());
-	}
+	} 
 
 	@Test
 	public void testDeleteuser() {
